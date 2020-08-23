@@ -7,7 +7,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
 // Get profile
-router.get(
+/* router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
@@ -22,8 +22,19 @@ router.get(
       res.status(500).send("Server error");
     }
   }
-);
-
+); */
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }, (req, res) => {
+    Profile.findOne({ user: req.user.id }, (err, user) => {
+      if (err) {
+        res.status(400).json({ msg: "No profile found for user" });
+      }
+      res.json(profile);
+    });
+  })
+),
+  /*
 // Create || update Profile
 router.post(
   "/",
@@ -64,7 +75,49 @@ router.post(
       res.status(500).send("server error");
     }
   }
-);
+); */
+  router.post(
+    "/",
+    [
+      passport.authenticate("jwt", { session: false }),
+      // [check("bio", "Yout must add a short bio").not().isEmpty()],
+    ],
+    (req, res) => {
+      const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+      const { bio, location, vegan } = req.body;
+
+      const profileFields = {};
+      profileFields.user = req.user.id;
+      if (bio) profileFields.bio = bio;
+      if (vegan) profileFields.vegan = vegan;
+      if (location) profileFields.location = location;
+
+      Profile.findOne({ user: req.user.id }, (err, profile) => {
+        if (profile) {
+          // Update profile
+          Profile.findOneAndUpdate(
+            { user: req.user.id },
+            { $set: profileFields },
+            { new: true },
+            (err, profile) => {
+              return res.json(profile);
+            }
+          );
+        }
+        if (!profile) {
+          const profile = new Profile(profileFields);
+          profile.save();
+          return res.json(profile);
+        }
+        if (err) {
+          console.log("err");
+        }
+      });
+    }
+  );
 
 // Delete Profile and account
 
@@ -74,13 +127,13 @@ router.delete(
   async (req, res) => {
     try {
       // Delete recipes
-      await Recipe.deleteMany({user:req.user.id});
+      await Recipe.deleteMany({ user: req.user.id });
       // Delete profile
-      await Profile.findOneAndRemove({user:req.user.id});
+      await Profile.findOneAndRemove({ user: req.user.id });
       // Delete user
-      await User.findOneAndRemove({_id: req.user.id});
+      await User.findOneAndRemove({ _id: req.user.id });
 
-      return res.json({msg:"User succesfully deleted!"});
+      return res.json({ msg: "User succesfully deleted!" });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");

@@ -20,7 +20,7 @@ const onSubmit = async e=> {
     login({email,password});
 }
   if(isAuthenticated){
-     return <Redirect to='/' />
+     return <Redirect to='/recipes' />
   }
   return <Fragment>
       <form onSubmit={e=>onSubmit(e)}>
