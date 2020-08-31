@@ -1,17 +1,39 @@
 import axios from "axios";
-import {GET_RECIPES,RECIPES_FAIL} from "./types";
+import { GET_RECIPES, RECIPES_FAIL, RECIPE_ADDED } from "./types";
 
 export const getRecipes = search => async dispatch => {
+  try {
+    let res = await axios.get("/api/recipe/");
 
+    res.data = await res.data.filter(res =>
+      res.dish.toLowerCase().includes(search.toLowerCase())
+    );
 
-    try {
+    dispatch({ type: GET_RECIPES, payload: { data: res.data, search } });
+  } catch (err) {
+    dispatch({ type: RECIPES_FAIL });
+  }
+};
 
-        let res = await axios.get("/api/recipe/");
+export const addRecipe = ({
+  dish,
+  description,
+  intro,
+  picture,
+  ingredients,
+}) => async dispatch => {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
 
-        res.data = await res.data.filter(res => res.dish.toLowerCase().includes(search.toLowerCase()));
+  const body = { dish, description, intro, picture, ingredients };
 
-        dispatch({type: GET_RECIPES, payload:{ data:res.data,search}});
-    } catch (err) {
-        dispatch({type:RECIPES_FAIL});
-    }
-}
+  console.log(body);
+  try {
+    const res = await axios.post("/api/recipe", body, config);
+  } catch (error) {
+    console.log(error);
+  }
+};

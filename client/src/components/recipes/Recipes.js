@@ -4,6 +4,7 @@ import { getRecipes } from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
+import AddImage from "../recipe/AddImage";
 
 const Recipes = ({ recipe: { recipe, loading } }) => {
   return (

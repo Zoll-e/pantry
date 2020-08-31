@@ -58,11 +58,11 @@ const RecipeSchema = new mongoose.Schema({
       },
     },
   ],
-  pictures: [
-    {
-      type: String,
-    },
-  ],
+  picture: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"photo",
+  },
+
   date: {
     type: Date,
     default: Date.now,

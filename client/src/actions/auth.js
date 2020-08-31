@@ -6,11 +6,12 @@ import {
   USER_LOADED,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  GET_ERRORS,
+  REMOVE_ERRORS,
   LOG_OUT,
   LOG_OUT_ERROR,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
-import { setAlert } from "../actions/alert";
 
 // Register user
 
@@ -33,7 +34,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "error")));
+      dispatch({type:GET_ERRORS,payload:errors});
     }
     dispatch({
       type: REGISTER_FAIL,
@@ -77,7 +78,7 @@ export const login = ({ email, password }) => async dispatch => {
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "error")));
+      dispatch({type:GET_ERRORS,payload:errors});
     }
     dispatch({
       type: LOGIN_FAIL,
@@ -95,3 +96,8 @@ export const logOut = () => async dispatch => {
     dispatch({ type: LOG_OUT_ERROR });
   }
 };
+
+  // Remove errors
+  export const removeErrors = () => dispatch=>{
+    dispatch({type:REMOVE_ERRORS});
+  }

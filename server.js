@@ -17,6 +17,8 @@ require('./config/passport')(passport);
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/recipe', require('./routes/api/recipe'));
+app.use('/api/photos', require('./routes/api/photos'));
+
 
 
 const port = 5000;

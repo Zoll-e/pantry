@@ -1,18 +1,18 @@
 import React, { useEffect, Fragment } from "react";
 import "./App.css";
-import Landing from "./components/layout/Landing";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
-import Alert from "./components/layout/Alert";
 import Recipes from "./components/recipes/Recipes";
+import PrivateRoute from "./utils/PrivateRoute";
 
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
 import Navbar from "./components/layout/Navbar";
+import RecipeForm from "./components/recipe/RecipeForm";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -25,15 +25,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
         <Fragment>
-          <Route exact path="/" component={Landing} />
+          <Navbar />
+          <Route exact path="/" component={Recipes} />
           <section>
-            <Alert />
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/recipes" component={Recipes} />
+              
+              <PrivateRoute exact path="/add-recipe" component={RecipeForm} />
             </Switch>
           </section>
         </Fragment>

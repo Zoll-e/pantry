@@ -2,6 +2,8 @@ const express = require("express");
 const passport = require("passport");
 const { check, validationResult } = require("express-validator");
 const Recipe = require("../../model/Recipe");
+const { Router } = require("express");
+const Photo = require("../../model/Photo");
 const router = express.Router();
 
 /*
@@ -33,6 +35,7 @@ router.post(
     check("dish", "Name is required").not().isEmpty(),
     check("intro", "Intro is required").not().isEmpty(),
     check("description", "Description is required").not().isEmpty(),
+    check("picture", "Picture is required").not().isEmpty(),
   ],
   async (req, res) => {
     errors = validationResult(req);
@@ -40,7 +43,7 @@ router.post(
       return res.json({ errors: errors.array() });
     }
 
-    const { dish, intro, description, ingredients } = req.body;
+    const { dish, intro, description, ingredients, picture } = req.body;
 
     recipeFields = {};
     recipeFields.user = req.user.id;
@@ -48,6 +51,7 @@ router.post(
     if (dish) recipeFields.dish = dish;
     if (intro) recipeFields.intro = intro;
     if (description) recipeFields.description = description;
+    if (picture) recipeFields.picture = picture;
     // Add ingredients
     ingredientFields = [];
     if (ingredients)
@@ -79,6 +83,8 @@ router.post(
     if (dish) recipeFields.dish = dish;
     if (intro) recipeFields.intro = intro;
     if (description) recipeFields.description = description;
+    if (picture) recipeFields.picture = picture;
+
     // Add ingredients
     ingredientFields = [];
     if (ingredients)
@@ -186,5 +192,36 @@ router.get("/:recipe_id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+// Delete Recipe
+router.delete(
+  "/:recipe_id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const recipe = await Recipe.findOne({ _id: req.params.recipe_id });
+      if (!recipe) {
+        return res.status(404).json({ msg: "Recipe not found" });
+      }
+      if (recipe.user.toString() !== req.user.id) {
+        return res
+          .status(401)
+          .json({ msg: "You can only delete your own recipe" });
+      }
+      if (recipe.picture) {
+        try {
+          const photo = await Photo.findOne({ _id: recipe.picture });
+          photo.delete();
+        } catch (error) {
+          console.log("picture not found, deleting recipe anyway");
+        }
+      }
+      recipe.delete();
+      return res.json({ msg: "Recipe deleted" });
+    } catch (error) {
+      return res.status(500).send("Server error");
+    }
+  }
+);
 
 module.exports = router;

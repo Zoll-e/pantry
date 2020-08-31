@@ -1,0 +1,90 @@
+Date : 2020-08-31 15:15:49
+Directory : /Users/zolle/Developer/Pantry
+Total : 47 files,  17006 codes, 115 comments, 320 blanks, all 17441 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          6 |     15,105 |          0 |          5 |     15,110 |
+| JavaScript |         38 |      1,600 |        112 |        253 |      1,965 |
+| CSS        |          1 |        225 |          3 |         25 |        253 |
+| HTML       |          1 |         39 |          0 |          5 |         44 |
+| Markdown   |          1 |         37 |          0 |         32 |         69 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                        | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                           |         47 |     17,006 |        115 |        320 |     17,441 |
+| client                                                                      |         33 |     15,138 |         11 |        219 |     15,368 |
+| client/public                                                               |          2 |         47 |          0 |          6 |         53 |
+| client/src                                                                  |         28 |      1,230 |         11 |        179 |      1,420 |
+| client/src/actions                                                          |          4 |        152 |          4 |         29 |        185 |
+| client/src/components                                                       |         12 |        576 |          1 |         78 |        655 |
+| client/src/components/auth                                                  |          2 |        187 |          1 |         20 |        208 |
+| client/src/components/layout                                                |          2 |        122 |          0 |         11 |        133 |
+| client/src/components/recipe                                                |          4 |        175 |          0 |         23 |        198 |
+| client/src/components/recipes                                               |          4 |         92 |          0 |         24 |        116 |
+| client/src/reducers                                                         |          5 |        154 |          0 |         23 |        177 |
+| client/src/utils                                                            |          3 |         63 |          2 |         10 |         75 |
+| config                                                                      |          3 |         47 |          2 |          7 |         56 |
+| model                                                                       |          4 |        125 |          0 |         15 |        140 |
+| routes                                                                      |          4 |        413 |         99 |         67 |        579 |
+| routes/api                                                                  |          4 |        413 |         99 |         67 |        579 |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                    | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/zolle/Developer/Pantry/client/README.md                              | Markdown   |         37 |          0 |         32 |         69 |
+| /Users/zolle/Developer/Pantry/client/package-lock.json                      | JSON       |     13,781 |          0 |          1 |     13,782 |
+| /Users/zolle/Developer/Pantry/client/package.json                           | JSON       |         43 |          0 |          1 |         44 |
+| /Users/zolle/Developer/Pantry/client/public/index.html                      | HTML       |         39 |          0 |          5 |         44 |
+| /Users/zolle/Developer/Pantry/client/public/manifest.json                   | JSON       |          8 |          0 |          1 |          9 |
+| /Users/zolle/Developer/Pantry/client/src/App.css                            | CSS        |        225 |          3 |         25 |        253 |
+| /Users/zolle/Developer/Pantry/client/src/App.js                             | JavaScript |         39 |          1 |          6 |         46 |
+| /Users/zolle/Developer/Pantry/client/src/actions/auth.js                    | JavaScript |         86 |          4 |         14 |        104 |
+| /Users/zolle/Developer/Pantry/client/src/actions/image.js                   | JavaScript |         17 |          0 |          8 |         25 |
+| /Users/zolle/Developer/Pantry/client/src/actions/recipe.js                  | JavaScript |         33 |          0 |          7 |         40 |
+| /Users/zolle/Developer/Pantry/client/src/actions/types.js                   | JavaScript |         16 |          0 |          0 |         16 |
+| /Users/zolle/Developer/Pantry/client/src/components/auth/Login.js           | JavaScript |         81 |          0 |         12 |         93 |
+| /Users/zolle/Developer/Pantry/client/src/components/auth/Register.js        | JavaScript |        106 |          1 |          8 |        115 |
+| /Users/zolle/Developer/Pantry/client/src/components/layout/Groceries.js     | JavaScript |         11 |          0 |          4 |         15 |
+| /Users/zolle/Developer/Pantry/client/src/components/layout/Navbar.js        | JavaScript |        111 |          0 |          7 |        118 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipe/AddImage.js      | JavaScript |         39 |          0 |          9 |         48 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipe/AddIngredient.js | JavaScript |         38 |          0 |          3 |         41 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipe/Ingredient.js    | JavaScript |         10 |          0 |          2 |         12 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipe/RecipeForm.js    | JavaScript |         88 |          0 |          9 |         97 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipes/Picture.js      | JavaScript |          7 |          0 |          4 |         11 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipes/RecipeCard.js   | JavaScript |         14 |          0 |          4 |         18 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipes/Recipes.js      | JavaScript |         37 |          0 |          4 |         41 |
+| /Users/zolle/Developer/Pantry/client/src/components/recipes/SearchRecipe.js | JavaScript |         34 |          0 |         12 |         46 |
+| /Users/zolle/Developer/Pantry/client/src/index.js                           | JavaScript |          9 |          0 |          3 |         12 |
+| /Users/zolle/Developer/Pantry/client/src/reducers/auth.js                   | JavaScript |         80 |          0 |          5 |         85 |
+| /Users/zolle/Developer/Pantry/client/src/reducers/errors.js                 | JavaScript |         14 |          0 |          4 |         18 |
+| /Users/zolle/Developer/Pantry/client/src/reducers/image.js                  | JavaScript |         24 |          0 |          6 |         30 |
+| /Users/zolle/Developer/Pantry/client/src/reducers/index.js                  | JavaScript |         11 |          0 |          2 |         13 |
+| /Users/zolle/Developer/Pantry/client/src/reducers/recipe.js                 | JavaScript |         25 |          0 |          6 |         31 |
+| /Users/zolle/Developer/Pantry/client/src/store.js                           | JavaScript |         12 |          0 |          5 |         17 |
+| /Users/zolle/Developer/Pantry/client/src/utils/FakeInput.js                 | JavaScript |         27 |          0 |          3 |         30 |
+| /Users/zolle/Developer/Pantry/client/src/utils/PrivateRoute.js              | JavaScript |         27 |          0 |          4 |         31 |
+| /Users/zolle/Developer/Pantry/client/src/utils/setAuthToken.js              | JavaScript |          9 |          2 |          3 |         14 |
+| /Users/zolle/Developer/Pantry/config/db.js                                  | JavaScript |         18 |          1 |          3 |         22 |
+| /Users/zolle/Developer/Pantry/config/default.json                           | JSON       |          4 |          0 |          0 |          4 |
+| /Users/zolle/Developer/Pantry/config/passport.js                            | JavaScript |         25 |          1 |          4 |         30 |
+| /Users/zolle/Developer/Pantry/model/Photo.js                                | JavaScript |         13 |          0 |          5 |         18 |
+| /Users/zolle/Developer/Pantry/model/Profile.js                              | JavaScript |         23 |          0 |          3 |         26 |
+| /Users/zolle/Developer/Pantry/model/Recipe.js                               | JavaScript |         69 |          0 |          4 |         73 |
+| /Users/zolle/Developer/Pantry/model/User.js                                 | JavaScript |         20 |          0 |          3 |         23 |
+| /Users/zolle/Developer/Pantry/package-lock.json                             | JSON       |      1,243 |          0 |          1 |      1,244 |
+| /Users/zolle/Developer/Pantry/package.json                                  | JSON       |         26 |          0 |          1 |         27 |
+| /Users/zolle/Developer/Pantry/routes/api/photos.js                          | JavaScript |         57 |          3 |          7 |         67 |
+| /Users/zolle/Developer/Pantry/routes/api/profile.js                         | JavaScript |         72 |         65 |          8 |        145 |
+| /Users/zolle/Developer/Pantry/routes/api/recipe.js                          | JavaScript |        180 |         21 |         27 |        228 |
+| /Users/zolle/Developer/Pantry/routes/api/user.js                            | JavaScript |        104 |         10 |         25 |        139 |
+| /Users/zolle/Developer/Pantry/server.js                                     | JavaScript |         14 |          3 |         10 |         27 |
+| Total                                                                       |            |     17,006 |        115 |        320 |     17,441 |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+

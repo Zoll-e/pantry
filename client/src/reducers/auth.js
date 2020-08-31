@@ -12,8 +12,8 @@ import {
 const initialState = {
   token: localStorage.getItem("jwtToken"),
   isAuthenticated: false,
-  loading: false,
-  user: null,
+  loading: true,
+  user: null
 };
 
 export default function (state = initialState, action) {

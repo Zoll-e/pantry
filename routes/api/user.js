@@ -22,7 +22,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.mapped() });
     }
 
     const { name, email, password } = req.body;
@@ -30,7 +30,7 @@ router.post(
       // Check if user exists
       let user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: "User already exists" });
+        return res.status(400).json({errors:{email:{msg:"User already exists"}}})
       }
 
       user = new User({
@@ -75,7 +75,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.mapped() });
     }
     const { email, password } = req.body;
 
@@ -83,13 +83,13 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(400).json({errors:[{msg:"Invalid credidentals"}]});
+        return res.status(400).json({errors:{email:{msg:"Email address not found"}}})
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({errors:[{msg:"Invalid credidentals"}]});
+        return res.status(400).json({errors:{password:{msg:"Invalid password"}}})
       }
 
       // user match

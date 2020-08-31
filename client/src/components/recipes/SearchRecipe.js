@@ -21,7 +21,6 @@ const SearchRecipe = ({getRecipes, recipe: { recipe, loading } }) => {
     <Fragment>
       <input 
       className="header-primary-input"
-        list="searchResults"
         type="text"
         size="90"
         autoComplete="off"
