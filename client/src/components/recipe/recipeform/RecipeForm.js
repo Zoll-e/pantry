@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Fragment } from "react";
-import PropTypes from "prop-types";
+import React, { useState, Fragment } from "react";
 import AddImage from "./AddImage";
-import { addRecipe } from "../../actions/recipe";
+import { addRecipe } from "../../../actions/recipe";
 import { connect } from "react-redux";
 import AddIngredient from "./AddIngredient";
 import { Ingredient } from "./Ingredient";
@@ -32,9 +31,8 @@ const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
   };
 
   const addItem = passedIngredient => {
-    if (passedIngredient.length > 0) {
       setIngredients([...ingredientsArray, passedIngredient]);
-    }
+    
   };
   const removeItem = id => {
     setIngredients(

@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { logOut } from "../../actions/auth";
 import { connect } from "react-redux";
-import Login from "../auth/Login";
 
-const Navbar = ({ logOut, auth: { isAuthenticated, loading, user }}) => {
+const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
   const authLinks = (
     <Fragment>
       <li className="nav-item">
@@ -15,7 +14,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user }}) => {
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/">
-          { user !== null && user.name.trim().split(" ")[0]  }
+          {user !== null && user.name.trim().split(" ")[0]}
         </Link>
       </li>
     </Fragment>
@@ -44,6 +43,10 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user }}) => {
       <Link className="navbar-brand" to="/">
         Pantry
       </Link>
+      <Link className="navbar-brand" to="/userprofile">
+      {user !== null && user.name.trim().split(" ")[0]}
+
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -62,7 +65,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user }}) => {
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
-              href="#"
+              href="#!"
               id="navbarDropdown"
               role="button"
               data-toggle="dropdown"
@@ -72,34 +75,25 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user }}) => {
               Dropdown
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
+              <Link className="dropdown-item" to="/login">
+                Login
+              </Link>
+              <Link className="dropdown-item" to="/profile">
+                Profile
+              </Link>
               {isAuthenticated && (
                 <Fragment>
                   <div className="dropdown-divider"></div>
 
-                  <a className="dropdown-item" onClick={logOut}>
+                  <span className="dropdown-item" onClick={logOut}>
                     Logout
-                  </a>
+                  </span>
                 </Fragment>
               )}
             </div>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn btn-outline-primary my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
+       
       </div>
     </nav>
   );

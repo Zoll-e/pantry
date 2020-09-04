@@ -2,8 +2,8 @@ import axios from "axios";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  AUTH_ERROR,
   USER_LOADED,
+  USER_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   GET_ERRORS,
@@ -45,7 +45,7 @@ export const register = ({ name, email, password }) => async dispatch => {
 export const loadUser = () => async dispatch => {
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
-
+  }
     try {
       const res = await axios.get("/api/user/me");
 
@@ -54,11 +54,12 @@ export const loadUser = () => async dispatch => {
         payload: res.data,
       });
     } catch (err) {
+
       dispatch({
-        type: AUTH_ERROR,
+        type: USER_ERROR,
       });
     }
-  }
+  
 };
 
 // Login user

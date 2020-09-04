@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { upload } from "../../actions/image";
+import { upload } from "../../../actions/image";
 
 const AddImage = ({ upload }) => {
   const [photo, setPhoto] = useState(null);
@@ -19,8 +19,7 @@ const AddImage = ({ upload }) => {
 
   return (
     <div>
-      <form
-        onSubmit={onSubmit}
+      <div
         method="post"
         encType="multipart/form-data"
       >
@@ -28,13 +27,15 @@ const AddImage = ({ upload }) => {
           <input type="file" name="photo" onChange={onChange} />
         
         <button
+                onClick={onSubmit}
+
           variant="primary"
           type="submit"
           disabled={photo ? false : true}
         >
           Upload
         </button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getRecipes } from "../../actions/recipe";
 
 
-const SearchRecipe = ({getRecipes, recipe: { recipe, loading } }) => {
+const SearchRecipe = ({getRecipes, recipes: { recipes, loading } }) => {
   
     const [search, setSearch] = useState("");
 
@@ -35,11 +35,11 @@ const SearchRecipe = ({getRecipes, recipe: { recipe, loading } }) => {
 };
 
 SearchRecipe.propTypes = {
-  recipe: PropTypes.object.isRequired,
+  recipes: PropTypes.object.isRequired,
   
 };
 const mapStateToProps = state => ({
-  recipe: state.recipe,
+  recipes: state.recipes,
 });
 
 export default connect(mapStateToProps,{getRecipes})(SearchRecipe);

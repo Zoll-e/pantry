@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Picture = picture => {
+const Picture = ({src,classes,styles}) => {
 
     return (
-        <img src={`/api/photos/${picture.id}`}  alt=""/>
+        <img src={src} className={classes} alt="" style={styles}/>
     )
 }
 

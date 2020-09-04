@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useState, Fragment } from "react";
 
 function AddIngredient({ addItem }) {
   const [item, setItem] = useState({
@@ -8,7 +6,7 @@ function AddIngredient({ addItem }) {
     portion:"",
   });
   return (
-    <div>
+    <Fragment>
       <form>
         <p>Add ingredient</p>
         <input
@@ -25,15 +23,14 @@ function AddIngredient({ addItem }) {
         <button
           type="submit"
           onClick={e => {
-            addItem(item);
             e.preventDefault();
+            addItem(item);
           }}
         >
           kuld
         </button>
       </form>
-      <h1></h1>
-    </div>
+    </Fragment>
   );
 }
 

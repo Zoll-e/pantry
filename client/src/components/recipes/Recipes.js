@@ -4,9 +4,8 @@ import { getRecipes } from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
-import AddImage from "../recipe/AddImage";
 
-const Recipes = ({ recipe: { recipe, loading } }) => {
+const Recipes = ({ recipes: { recipes, loading } }) => {
   return (
     <Fragment>
       <div className="header">
@@ -18,23 +17,21 @@ const Recipes = ({ recipe: { recipe, loading } }) => {
         <SearchRecipe />
         </div>
         </div>
-        <main>
-        <section className="cards">
-          {recipe &&
+        <div className="">
+          {recipes &&
             !loading &&
-            recipe.map(recipe => <RecipeCard key={recipe._id} recipe={recipe} />)}
-        </section>
-        </main>
+            recipes.map(recipe => <RecipeCard key={recipe._id} recipe={recipe} />)}
+        </div>
     </Fragment>
   );
 };
 
 Recipes.propTypes = {
   getRecipes: PropTypes.func.isRequired,
-  recipe: PropTypes.object.isRequired,
+  recipes: PropTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
-  recipe: state.recipe,
+  recipes: state.recipes,
 });
 
 export default connect(mapStateToProps, { getRecipes })(Recipes);

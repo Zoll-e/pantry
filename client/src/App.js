@@ -12,15 +12,17 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
 import Navbar from "./components/layout/Navbar";
-import RecipeForm from "./components/recipe/RecipeForm";
+import RecipeForm from "./components/recipe/recipeform/RecipeForm";
+import RecipeShow from "./components/recipe/RecipeShow";
 
-if (localStorage.jwtToken) {
+
+const App = () => {
+  if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
 }
-const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
-  }, []);
+  },);
 
   return (
     <Provider store={store}>
@@ -32,7 +34,9 @@ const App = () => {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              
+              <Route exact path="/recipe/:id" component={RecipeShow} />
+
+              <PrivateRoute exact path="profile" component={RecipeForm}/>
               <PrivateRoute exact path="/add-recipe" component={RecipeForm} />
             </Switch>
           </section>

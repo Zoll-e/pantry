@@ -5,6 +5,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  USER_ERROR,
   LOG_OUT,
   LOG_OUT_ERROR,
 } from "../actions/types";
@@ -44,6 +45,13 @@ export default function (state = initialState, action) {
         loading: false,
         user: payload,
       };
+      case USER_ERROR:{
+        return {
+          ...state,
+          errors: payload,
+          loading: false
+        }
+      }
     case LOGIN_SUCCESS:
       localStorage.setItem("jwtToken", payload.token);
       return {

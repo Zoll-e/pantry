@@ -173,7 +173,7 @@ router.put(
 );
 
 // Get recipes by user_id
-router.get("/:user_id", async (req, res) => {
+router.get("/userrecipes/:user_id", async (req, res) => {
   try {
     const recipes = await Recipe.find({ user: req.params.user_id });
     return res.json(recipes);
@@ -185,7 +185,7 @@ router.get("/:user_id", async (req, res) => {
 // Get recipe by id
 router.get("/:recipe_id", async (req, res) => {
   try {
-    const recipe = await Recipe.findOne({ _id: req.params.recipe_id });
+    const recipe = await Recipe.findById({ _id: req.params.recipe_id });
     return res.json(recipe);
   } catch (err) {
     console.error(err.message);

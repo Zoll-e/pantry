@@ -1,26 +1,29 @@
-import { RECIPES_FAIL, GET_RECIPE,RECIPE_ADDED } from "../actions/types";
+import { RECIPES_FAIL, GET_RECIPES,GET_RECIPE } from "../actions/types";
 
 const initialState = {
   loading: true,
+  recipes:null,
+  search:"",
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_RECIPE:
+    case GET_RECIPES:
       return {
         ...state,
-        recipe: payload,
+        recipes: payload.data,
+        loading: false,
+        search: payload.search,
+      };
+      case GET_RECIPE:
+      return {
+        ...state,
+        recipes: payload.data,
         loading: false,
       };
-
-      case RECIPE_ADDED:
-          return{
-              ...state,
-              recipe: payload,
-              loading: false,
-          }
+    
     case RECIPES_FAIL:
       return {
         ...state,
