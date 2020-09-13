@@ -1,48 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { upload } from "../../../actions/image";
+import { upload, clearOldPicture } from "../../../actions/image";
 
-const AddImage = ({ upload }) => {
-  const [photo, setPhoto] = useState(null);
+const AddImage = ({ upload, clearOldPicture, errors, image }) => {
 
   const onChange = e => {
-    setPhoto(e.target.files[0]);
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    if (photo) {
-      upload(photo);
+    if (image) {
+      clearOldPicture(image);
     }
+    upload(e.target.files[0]);
   };
 
   return (
-    <div>
-      <div
-        method="post"
-        encType="multipart/form-data"
-      >
-          <span>Choose photo to upload</span>
-          <input type="file" name="photo" onChange={onChange} />
-        
-        <button
-                onClick={onSubmit}
+    <Fragment>
+      <div method="post" encType="multipart/form-data">
+        <span>Choose photo to upload</span>
+        <input type="file" name="picture" onChange={onChange} />
+        {errors && <p style={{color:"red"}}>{errors.msg}</p>}
 
-          variant="primary"
-          type="submit"
-          disabled={photo ? false : true}
-        >
-          Upload
-        </button>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
-
 AddImage.propTypes = {
   upload: PropTypes.func.isRequired,
+  clearOldPicture: PropTypes.func.isRequired,
 };
 
-export default connect(null, { upload })(AddImage);
+const mapStateToProps = state => ({
+  image: state.image.route,
+});
+export default connect(mapStateToProps, { upload, clearOldPicture })(AddImage);

@@ -4,14 +4,13 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { Link, Redirect } from "react-router-dom";
 import { Groceries } from "../layout/Groceries";
-import {removeErrors} from "../../actions/auth";
+import {removeErrors} from "../../actions/errors";
 import { FakeInput } from "../../utils/FakeInput";
 
 const Login = ({ isAuthenticated, login, errors,removeErrors }) => {
   const [formData, setFormdata] = useState({
     email: "",
     password: "",
-    errors:{}
   });
   const { email, password } = formData;
 

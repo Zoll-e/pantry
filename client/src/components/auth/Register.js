@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { register } from "../../actions/auth";
 import { Link, Redirect } from "react-router-dom";
 import { Groceries } from "../layout/Groceries";
-import { removeErrors } from "../../actions/auth";
+import { removeErrors } from "../../actions/errors";
 import { FakeInput } from "../../utils/FakeInput";
 
 const Register = ({ isAuthenticated, register, errors, removeErrors }) => {
@@ -13,7 +13,6 @@ const Register = ({ isAuthenticated, register, errors, removeErrors }) => {
     email: "",
     password: "",
     password2:"",
-    errors:{}
   });
   const { name, email, password, password2 } = formData;
   const [password2Validation ,setPassword2Validation] = useState("");

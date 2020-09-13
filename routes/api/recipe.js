@@ -29,18 +29,19 @@ router.get("/", async (req, res) => {
 // Add recipe
 router.post(
   "/",
-
-  passport.authenticate("jwt", { session: false }),
   [
-    check("dish", "Name is required").not().isEmpty(),
-    check("intro", "Intro is required").not().isEmpty(),
-    check("description", "Description is required").not().isEmpty(),
-    check("picture", "Picture is required").not().isEmpty(),
+    check("dish", "What's your dish called").not().isEmpty(),
+    check("intro", "Write a short intro of this recipe").not().isEmpty(),
+    check("description", "Please provide instructions").not().isEmpty(),
+    check("picture", "Please upload a picture").not().isEmpty(),
+
   ],
+  passport.authenticate("jwt", { session: false }),
+
   async (req, res) => {
-    errors = validationResult(req);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.mapped() });
     }
 
     const { dish, intro, description, ingredients, picture } = req.body;

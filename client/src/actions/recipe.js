@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_RECIPES, RECIPES_FAIL, RECIPE_ADDED,GET_RECIPE } from "./types";
+import { GET_RECIPES, RECIPES_FAIL, RECIPE_ADDED,GET_RECIPE,GET_ERRORS } from "./types";
 
 export const getRecipe = id => async dispatch => {
   try {
@@ -39,13 +39,17 @@ export const addRecipe = ({
     },
   };
 
-  const body = { dish, description, intro, picture, ingredients };
-
-  console.log(body);
+  const body = {dish,description,intro,picture,ingredients};
   try {
-    const res = await axios.post("/api/recipe", body, config);
+    
+
+    const res = await axios.post("/api/recipe",body, config);
     dispatch({type: RECIPE_ADDED,payload:res.data});
-  } catch (error) {
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      dispatch({type:GET_ERRORS,payload:errors});
+    }
     dispatch({type:RECIPES_FAIL})
   }
 };

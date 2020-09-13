@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {IMAGE_UPLOADED, IMAGE_UPLOAD_FAIL} from "./types";
+import {IMAGE_UPLOADED, IMAGE_UPLOAD_FAIL,IMAGE_REMOVED,IMAGE_REMOVE_FAIL} from "./types";
 
-export const upload = photo => async dispatch => {
+export const upload = picture => async dispatch => {
 
     const config = {
         headers: {
@@ -10,8 +10,8 @@ export const upload = photo => async dispatch => {
       }
     try {
       const formData = new FormData();
-      formData.append('photo', photo);
-      const res = await axios.post('/api/photos', formData, config );
+      formData.append('picture', picture);
+      const res = await axios.post('/api/picture', formData, config );
       dispatch({ type: IMAGE_UPLOADED, payload: res.data });
 
 
@@ -21,4 +21,17 @@ export const upload = photo => async dispatch => {
   
 };
 
+export const clearOldPicture = picture => async dispatch => {
 
+  try {
+   
+    const res = await axios.delete(`/api/picture/${picture}`);
+    console.log(res.data);
+    dispatch({ type: IMAGE_REMOVED, payload: res.data });
+
+
+        } catch (error) {
+          dispatch({type: IMAGE_REMOVE_FAIL})
+      }
+
+};

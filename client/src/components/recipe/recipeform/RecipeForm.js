@@ -1,11 +1,14 @@
 import React, { useState, Fragment } from "react";
 import AddImage from "./AddImage";
 import { addRecipe } from "../../../actions/recipe";
+import {removeErrors} from "../../../actions/errors";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import AddIngredient from "./AddIngredient";
 import { Ingredient } from "./Ingredient";
+import {FakeInput} from "../../../utils/FakeInput";
 
-const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
+const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }) => {
   const [ingredientsArray, setIngredients] = useState([]);
   const [formData, setFormData] = useState({
     dish: "",
@@ -18,15 +21,16 @@ const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
   let { dish, description, intro, picture, ingredients } = formData;
 
   const onChange = async e => {
+    Object.keys(errors).length > 0 && removeErrors(); 
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async e => {
     e.preventDefault();
-    picture = photoId;
-    console.log(photoId);
-    console.log(picture);
+    
     ingredients = ingredientsArray;
+    picture = route;
     addRecipe({ dish, description, intro, picture, ingredients });
   };
 
@@ -42,7 +46,7 @@ const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
 
   return (
     <Fragment>
-      <AddImage />
+      <AddImage errors={errors.picture} />
       <AddIngredient addItem={addItem} />
       {ingredientsArray.map((ingredient, index) => (
         <Ingredient
@@ -54,30 +58,34 @@ const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
       ))}
       <form onSubmit={onSubmit}>
         <div>
-          <input
+          <FakeInput
+          label="name of the dish"
             type="text"
             name="dish"
             placeholder="Enter the name of your recipe"
             value={dish}
             onChange={onChange}
+            errors={errors.dish}
           />
         </div>
         <div>
-          <input
+          <FakeInput
             type="text"
             name="description"
             placeholder="Enter description"
             value={description}
             onChange={onChange}
+            errors={errors.description}
           />
         </div>
         <div>
-          <input
+          <FakeInput
             type="text"
             name="intro"
             placeholder="Enter an intro to your recipe"
             value={intro}
             onChange={onChange}
+            errors={errors.intro}
           />
         </div>
         <button>Button</button>
@@ -86,9 +94,13 @@ const RecipeForm = ({ addRecipe, image: { loading, photoId } }) => {
   );
 };
 
-RecipeForm.propTypes = {};
+RecipeForm.propTypes = {
+  removeErrors: PropTypes.func.isRequired,
+
+};
 
 const mapStateToProps = state => ({
   image: state.image,
+  errors:state.errors,
 });
-export default connect(mapStateToProps, { addRecipe })(RecipeForm);
+export default connect(mapStateToProps, { addRecipe,removeErrors })(RecipeForm);

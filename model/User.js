@@ -5,6 +5,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String
+  },
   email: {
     type: String,
     required: true,
@@ -13,6 +16,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  
+  friends: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

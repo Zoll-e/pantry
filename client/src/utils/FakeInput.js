@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 
 export const FakeInput = ({
   label,
-
   type,
   errors,
   placeholder,

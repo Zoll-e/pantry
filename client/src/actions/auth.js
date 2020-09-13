@@ -7,7 +7,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   GET_ERRORS,
-  REMOVE_ERRORS,
   LOG_OUT,
   LOG_OUT_ERROR,
 } from "./types";
@@ -98,7 +97,4 @@ export const logOut = () => async dispatch => {
   }
 };
 
-  // Remove errors
-  export const removeErrors = () => dispatch=>{
-    dispatch({type:REMOVE_ERRORS});
-  }
+  

@@ -2,7 +2,7 @@ import { IMAGE_UPLOADED, IMAGE_UPLOAD_FAIL } from "../actions/types";
 
 const initialState = {
   loading: true,
-  photoId: "",
+  route: "",
 };
 
 export default function (state = initialState, action) {
@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        photoId: payload._id,
+        route: payload,
       };
 
       case IMAGE_UPLOAD_FAIL:

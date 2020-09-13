@@ -12,30 +12,17 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
           Recipes
         </Link>
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/">
-          {user !== null && user.name.trim().split(" ")[0]}
-        </Link>
-      </li>
+    
     </Fragment>
   );
   const questLinks = (
     <Fragment>
       <li className="nav-item">
-        <Link className="nav-link" to="/recipes">
+        <Link className="nav-link" to="/">
           Recipes
         </Link>
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/login">
-          Login
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/register">
-          Register
-        </Link>
-      </li>
+     
     </Fragment>
   );
   return (
@@ -43,10 +30,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
       <Link className="navbar-brand" to="/">
         Pantry
       </Link>
-      <Link className="navbar-brand" to="/userprofile">
-      {user !== null && user.name.trim().split(" ")[0]}
-
-      </Link>
+     
       <button
         className="navbar-toggler"
         type="button"
@@ -72,7 +56,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Dropdown
+      {user !== null && isAuthenticated ? user.name.trim().split(" ")[0] : "Profile"}
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link className="dropdown-item" to="/login">
