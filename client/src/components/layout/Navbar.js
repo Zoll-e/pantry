@@ -1,10 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { logOut } from "../../actions/auth";
 import { connect } from "react-redux";
+import Login from "../auth/Login";
 
 const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const authLinks = (
     <Fragment>
       <li className="nav-item">
@@ -12,7 +18,6 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
           Recipes
         </Link>
       </li>
-    
     </Fragment>
   );
   const questLinks = (
@@ -22,15 +27,16 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
           Recipes
         </Link>
       </li>
-     
     </Fragment>
   );
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Login show={show} handleClose={handleClose} />
+
       <Link className="navbar-brand" to="/">
         Pantry
       </Link>
-     
+
       <button
         className="navbar-toggler"
         type="button"
@@ -56,17 +62,26 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-      {user !== null && isAuthenticated ? user.name.trim().split(" ")[0] : "Profile"}
+              {user !== null && isAuthenticated
+                ? user.name.trim().split(" ")[0]
+                : "Profile"}
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link className="dropdown-item" to="/login">
-                Login
-              </Link>
-              <Link className="dropdown-item" to="/profile">
-                Profile
-              </Link>
+              {!isAuthenticated && (
+                <Fragment>
+                  <span className="dropdown-item" onClick={handleShow}>
+                    Login
+                  </span>
+                </Fragment>
+              )}
               {isAuthenticated && (
                 <Fragment>
+                  <Link className="dropdown-item" to="/profile">
+                    Profile
+                  </Link>
+                  <Link className="dropdown-item" to="/add-recipe">
+                    Add recipe
+                  </Link>
                   <div className="dropdown-divider"></div>
 
                   <span className="dropdown-item" onClick={logOut}>
@@ -77,7 +92,6 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
             </div>
           </li>
         </ul>
-       
       </div>
     </nav>
   );

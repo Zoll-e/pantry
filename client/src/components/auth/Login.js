@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
@@ -6,8 +6,9 @@ import { Link, Redirect } from "react-router-dom";
 import { Groceries } from "../layout/Groceries";
 import {removeErrors} from "../../actions/errors";
 import { FakeInput } from "../../utils/FakeInput";
+import {Modal} from "react-bootstrap";
 
-const Login = ({ isAuthenticated, login, errors,removeErrors }) => {
+const Login = ({show,handleClose, isAuthenticated, login, errors,removeErrors }) => {
   const [formData, setFormdata] = useState({
     email: "",
     password: "",
@@ -25,15 +26,14 @@ const Login = ({ isAuthenticated, login, errors,removeErrors }) => {
     login({ email, password });
   };
   if (isAuthenticated) {
+    handleClose();
     return <Redirect to="/" />;
   }
   return (
-    <Fragment>
-      <div className="row offset-md-1 col-11 offset-1">
-        <div
-          className="row border rounded container login"
-        >
-          <div className="col-md-5 offset-md-1 col-12 offset-1 align-self-center">
+    <Modal show={show} onHide={handleClose} size="lg" dialogClassName={"row border rounded login"} >
+    <div className="row offset-md-1 col-12">
+       
+          <div className="col-md-6 col-12 offset-1 offset-md-0 align-self-center">
             <h1 className="text-primary">Sign in</h1>
             <form onSubmit={e => onSubmit(e)} className="form col-10">
              
@@ -66,14 +66,13 @@ const Login = ({ isAuthenticated, login, errors,removeErrors }) => {
             </p>
           </div>
           <div
-            className="col-md-5  w-100 offset-md-1"
+            className="col-md-5  w-100 col-12 offset-md-1"
             style={{ maxHeight: "100%" }}
           >
             <Groceries />
           </div>
         </div>
-      </div>
-    </Fragment>
+      </Modal>  
   );
 };
 

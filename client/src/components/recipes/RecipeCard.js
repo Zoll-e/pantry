@@ -1,6 +1,5 @@
 import React from "react";
 import Picture from "./Picture";
-import { Link } from "react-router-dom";
 import CardFooter from "./CardFooter";
 
 function Card({ recipe: { _id, dish, picture } }) {

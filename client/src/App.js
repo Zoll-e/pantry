@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import Recipes from "./components/recipes/Recipes";
@@ -33,7 +32,6 @@ const App = () => {
           <section>
             <Switch>
               <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
               <Route exact path="/recipe/:id" component={RecipeShow} />
 
               <PrivateRoute exact path="profile" component={RecipeForm}/>
