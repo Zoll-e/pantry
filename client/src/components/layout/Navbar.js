@@ -11,24 +11,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const authLinks = (
-    <Fragment>
-      <li className="nav-item">
-        <Link className="nav-link" to="/">
-          Recipes
-        </Link>
-      </li>
-    </Fragment>
-  );
-  const questLinks = (
-    <Fragment>
-      <li className="nav-item">
-        <Link className="nav-link" to="/">
-          Recipes
-        </Link>
-      </li>
-    </Fragment>
-  );
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Login show={show} handleClose={handleClose} />
@@ -50,8 +33,7 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          {isAuthenticated && !loading ? authLinks : questLinks}
+        <ul className="navbar-nav ">
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
@@ -78,6 +60,9 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
                 <Fragment>
                   <Link className="dropdown-item" to="/profile">
                     Profile
+                  </Link>
+                  <Link className="dropdown-item" to="/messages">
+                    Messages
                   </Link>
                   <Link className="dropdown-item" to="/add-recipe">
                     Add recipe

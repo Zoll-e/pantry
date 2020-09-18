@@ -33,6 +33,7 @@ const App = () => {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/recipe/:id" component={RecipeShow} />
+              
 
               <PrivateRoute exact path="profile" component={RecipeForm}/>
               <PrivateRoute exact path="/add-recipe" component={RecipeForm} />

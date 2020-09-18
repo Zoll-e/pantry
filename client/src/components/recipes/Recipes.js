@@ -1,27 +1,48 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useState,useEffect } from "react";
 import PropTypes from "prop-types";
 import { getRecipes } from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
+import { Loading } from "../../utils/Loading";
 
-const Recipes = ({ recipes: { recipes, loading } }) => {
+const Recipes = ({ recipes: { recipes, loading },getRecipes }) => {
+
+  const [search, setSearch] = useState("");
+
+  useEffect(()=>{
+      getRecipes(search);
+  },[getRecipes,search]);
+
+  const onChange = async e => {
+    setSearch(e.target.value);
+  };
+
   return (
     <Fragment>
-      <div className="header">
-        <div className="text-box">
-          <h1 className="heading-primary">
-            <span className="heading-primary-main"> pantry</span>
-            <span className="heading-primary-sub"> search for any dish comes to your mind </span>
-          </h1> 
-        <SearchRecipe />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="header">
+          <div className="text-box">
+            <h1 className="heading-primary">
+              <span className="heading-primary-main"> pantry</span>
+              <span className="heading-primary-sub">
+                search for any dish comes to your mind{" "}
+              </span>
+            </h1>
+            <SearchRecipe search={search} onChange={onChange} />
+          </div>
         </div>
-        </div>
-        <div className="">
-          {recipes &&
-            !loading &&
-            recipes.map(recipe => <RecipeCard key={recipe._id} recipe={recipe} />)}
-        </div>
+      )}
+
+      <div className="row container">
+        {recipes &&
+          !loading &&
+          recipes.map(recipe => (
+            <RecipeCard key={recipe._id} recipe={recipe} />
+          ))}
+      </div>
     </Fragment>
   );
 };

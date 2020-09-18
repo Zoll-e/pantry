@@ -30,9 +30,9 @@ const RecipeSchema = new mongoose.Schema({
   range: {
     type: Number,
   },
-  rating:{type:Number},
-  prep_time: { type: Date, default: new Date().setHours(0, 0, 0, 0) },
-  cook_time: { type: Date, default: new Date().setHours(0, 0, 0, 0) },
+  rating: { type: Number, default: 0 },
+  prep_time: { type: String },
+  cook_time: { type: String },
   category: [{ type: String }],
   servings: { type: Number, default: 2 },
   notes: { type: String },
@@ -51,7 +51,7 @@ const RecipeSchema = new mongoose.Schema({
       },
     },
   ],
-  
+
   comments: [
     {
       user: {
@@ -68,7 +68,7 @@ const RecipeSchema = new mongoose.Schema({
       },
     },
   ],
- 
+
   picture: {
     type: String,
   },

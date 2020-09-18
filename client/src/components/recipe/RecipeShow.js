@@ -9,20 +9,20 @@ const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
     getRecipe(match.params.id);
   }, [getRecipe, match.params.id]);
 
-  const pictureStyles = {maxHeight:"500px",width:"100%"};
+  const pictureStyles = { height:"800px" };
   return (
     <div>
       {recipe && (
         <Fragment>
-          
-            <Picture
-              src={`/api/photos/${recipe.picture}`}
-              styles={pictureStyles}
-            />
-          
-
-          <div>
-            <h1>{recipe.dish}</h1>
+          <Picture
+            src={`/${recipe.picture}`}
+            styles={pictureStyles}
+            classes="col-12 row"
+          />
+          <div className="container">
+            <div>
+              <h1>{recipe.dish}</h1>
+            </div>
           </div>
         </Fragment>
       )}

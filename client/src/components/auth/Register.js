@@ -25,9 +25,9 @@ const Register = ({ isAuthenticated, register, errors, removeErrors }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    password2==="" && setPassword2Validation({msg:"Password confirmation required"}) && console.log(password2Validation);
+    password2 === "" && setPassword2Validation({msg:"Password confirmation required"}) && console.log(password2Validation);
     password2 !== password && setPassword2Validation({msg:"Passwords doesn't match"});
-    register({ name, email, password });
+ 
   };
   if (isAuthenticated) {
     return <Redirect to="/" />;

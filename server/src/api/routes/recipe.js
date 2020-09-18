@@ -6,15 +6,6 @@ const { Router } = require("express");
 const Photo = require("../../model/Photo");
 const router = express.Router();
 
-/*
-functions:
-    Get all recipes
-    Add recipe
-    Update recipe
-    Like recipe
-    Unlike recipe
-    Get recipe by id
-*/
 // Get all recipes
 router.get("/", async (req, res) => {
   try {

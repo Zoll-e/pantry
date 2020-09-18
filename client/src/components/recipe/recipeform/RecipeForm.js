@@ -46,6 +46,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
 
   return (
     <Fragment>
+      <div className="container rounded border">
       <AddImage errors={errors.picture} />
       <AddIngredient addItem={addItem} />
       {ingredientsArray.map((ingredient, index) => (
@@ -57,9 +58,8 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
         />
       ))}
       <form onSubmit={onSubmit}>
-        <div>
+        <div className="col-4 offset-1">
           <FakeInput
-          label="name of the dish"
             type="text"
             name="dish"
             placeholder="Enter the name of your recipe"
@@ -68,7 +68,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
             errors={errors.dish}
           />
         </div>
-        <div>
+        <div className="col-4 offset-1">
           <FakeInput
             type="text"
             name="description"
@@ -78,7 +78,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
             errors={errors.description}
           />
         </div>
-        <div>
+        <div className="col-4 offset-1">
           <FakeInput
             type="text"
             name="intro"
@@ -88,8 +88,9 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
             errors={errors.intro}
           />
         </div>
-        <button>Button</button>
+        <button className="btn btn-primary">Done</button>
       </form>
+      </div>
     </Fragment>
   );
 };
