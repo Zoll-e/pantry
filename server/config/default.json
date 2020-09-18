@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb://localhost:27017/pantryshop",
+    "mongoURI": "mongodb://mongo:27017/pantryshop",
     "secretOrKey": "supersecrettoken"
 }
