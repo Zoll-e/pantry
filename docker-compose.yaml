@@ -5,8 +5,8 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: myapp-server
-    container_name: myapp-node-server
+    image: express
+    container_name: Express_backend_server
     command: npm start
     volumes:
       - ./server/:/usr/src/app
@@ -21,6 +21,7 @@ services:
       - app-network
   mongo:
     image: mongo
+    container_name: MongoDB
     volumes:
       - data-volume:/data/db
     ports:
@@ -31,9 +32,9 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    image: myapp-client
+    image: react
     stdin_open: true # docker run -i
-    container_name: myapp-react-client
+    container_name: React_client
     command: npm start
     volumes:
       - ./client/:/usr/app
