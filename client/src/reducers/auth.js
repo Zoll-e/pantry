@@ -83,6 +83,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         loading: false,
         token: null,
+        user: null,
       };
       case LOG_OUT_ERROR:
         return state;

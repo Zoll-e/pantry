@@ -1,28 +1,31 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 
-export const FakeInput = ({
+const Fakeinput = ({
   label,
   type,
-  errors,
   placeholder,
+  errors,
   name,
   value,
   onChange,
+  autoFocus,
 }) => {
+
   return (
-    <Fragment>
-      <div className="form-group row">
-        <label>{label}</label>
-        <input
-          type={type}
-          className={`form-control ${errors && "is-invalid"}`}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          onChange={onChange}
-        />
-        {errors && <div className="invalid-feedback">{errors.msg}</div>}
-      </div>
-    </Fragment>
+    <div>
+      <label>{label}</label>
+      <input
+        autoFocus={autoFocus}
+    type={type}
+        className={`${errors ? "invalid" : ""}`}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
+      {errors && <p>{errors.msg}</p>}
+    </div>
   );
 };
+
+export default Fakeinput;

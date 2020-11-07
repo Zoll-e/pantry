@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Register from "./components/auth/Register";
+import Register from "./components/layout/navbar/auth/auth/Register";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import Recipes from "./components/recipes/Recipes";
@@ -10,7 +10,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/layout/navbar/main/Navbar";
 import RecipeForm from "./components/recipe/recipeform/RecipeForm";
 import RecipeShow from "./components/recipe/RecipeShow";
 

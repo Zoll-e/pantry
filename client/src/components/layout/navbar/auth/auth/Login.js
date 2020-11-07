@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { login } from "../../actions/auth";
+import { login } from "../../../../../actions/auth";
 import { Link, Redirect } from "react-router-dom";
-import { Groceries } from "../layout/Groceries";
-import { removeErrors } from "../../actions/errors";
-import { FakeInput } from "../../utils/FakeInput";
-import { Modal } from "react-bootstrap";
+import { Groceries } from "../../../Groceries";
+import { removeErrors } from "../../../../../actions/errors";
+import Fakeinput  from "../../../../../utils/Fakeinput";
 
 const Login = ({
   show,
@@ -37,25 +36,28 @@ const Login = ({
     return <Redirect to="/" />;
   }
   return (
-    <Modal
+    <div
       show={show}
       onHide={handleClose}
       dialogClassName={"row border rounded container-fluid login"}
     >
-      <div className="col-md-5 offset-md-1 offset-1" style={{marginTop:"5%"}}>
+      <div
+        className="col-md-5 offset-md-1 offset-1"
+        style={{ marginTop: "5%" }}
+      >
         <h1 className="text-primary">Sign in</h1>
         <form onSubmit={e => onSubmit(e)} className="form col-10">
-          <FakeInput
+          <Fakeinput
             label="Email address"
             type="email"
-            placeholder="Enter email"
+            placeholder="Enter your email"
             name="email"
             value={email}
             onChange={onChange}
             errors={errors.email}
           />
 
-          <FakeInput
+          <Fakeinput
             label="Password"
             type="password"
             placeholder="Password"
@@ -68,13 +70,16 @@ const Login = ({
             Login
           </button>
         </form>
- 
+
         <p className="my-1 row">
-          Doesnt have an account? <Link to="/register">Sign Up</Link>
+          Doesnt have an account?{" "}
+          <Link to="/register" onClick={e => handleClose()}>
+            Sign Up
+          </Link>
         </p>
       </div>
       <Groceries />
-    </Modal>
+    </div>
   );
 };
 

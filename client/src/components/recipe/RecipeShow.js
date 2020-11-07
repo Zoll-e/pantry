@@ -9,19 +9,28 @@ const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
     getRecipe(match.params.id);
   }, [getRecipe, match.params.id]);
 
-  const pictureStyles = { height:"800px" };
+  const pictureStyles = { height: "800px" };
   return (
     <div>
       {recipe && (
         <Fragment>
-          <Picture
-            src={`/${recipe.picture}`}
-            styles={pictureStyles}
-            classes="col-12 row"
-          />
           <div className="container">
+            <Picture
+              src={`/${recipe.picture}`}
+              styles={pictureStyles}
+              classes="col-12 row"
+            />
             <div>
               <h1>{recipe.dish}</h1>
+              <h4>{recipe.intro}</h4>
+              <h4>Ingredients</h4>
+              {recipe.ingredients.map(ingredient => (
+                <h5>{ingredient}</h5>
+              ))}
+              <h4>{recipe.description}</h4>
+              <h5>Rate it if you like it</h5>
+              <h5>Like recipe</h5>
+              <h5>Leave a comment</h5>
             </div>
           </div>
         </Fragment>

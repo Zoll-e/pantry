@@ -24,16 +24,19 @@ const Recipes = ({ recipes: { recipes, loading },getRecipes }) => {
         <Loading />
       ) : (
         <div className="header">
+          
           <div className="text-box">
+            
             <h1 className="heading-primary">
-              <span className="heading-primary-main"> pantry</span>
               <span className="heading-primary-sub">
                 search for any dish comes to your mind{" "}
               </span>
             </h1>
             <SearchRecipe search={search} onChange={onChange} />
           </div>
+          
         </div>
+        
       )}
 
       <div className="row container">
@@ -43,6 +46,7 @@ const Recipes = ({ recipes: { recipes, loading },getRecipes }) => {
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
       </div>
+
     </Fragment>
   );
 };
