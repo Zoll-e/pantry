@@ -1,31 +1,52 @@
-import React, { Fragment, useState,useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { logOut, register } from "../../../../actions/auth";
+import { Link, useHistory } from "react-router-dom";
+import { logOut } from "../../../../actions/auth";
 import { connect } from "react-redux";
 import Hamburger from "../parts/Hamburger";
 import About from "../parts/About";
 import CV from "../parts/CV";
-import Modal from "../auth/modal/Modal";
+import Modal from "../auth/Modal"
 
 const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
   const [display, setDisplay] = useState(false);
 
-  const authLinks = <li className="element" onClick={logOut}>Logout</li>;
-  const guestLinks =  <li className="element" onClick={e => setDisplay(true)}>
-  Login
-</li>
+  const history = useHistory();
+
+  const returnHome =() => {
+    let path = '/';
+    history.push(path);
+  }
+  const authLinks = (
+    <Fragment>
+      <li className="element">
+        <Link to="/add-recipe" style={{textDecoration:"inherit",color:"inherit"}}>Add new recipe</Link>
+      </li>
+      <li className="element">Messages</li>
+      <li className="element">Favorites</li>
+      <li className="element">My Recipes</li>
+
+      <li className="element" onClick={e=>{logOut();window.location.reload()}}>
+        Logout
+      </li>
+    </Fragment>
+  );
+  const guestLinks = (
+    <li className="element" onClick={e => setDisplay(true)}>
+      Login
+    </li>
+  );
 
   return (
     <Fragment>
       <div className="nav">
-        {display && <Modal setDisplay={setDisplay} /> }
+        {display && <Modal setDisplay={setDisplay} />}
         <div id="hamburger">
           <Hamburger />
           <div id="content">
             <ul>
               {isAuthenticated ? authLinks : guestLinks}
-             
+
               <li className="element">
                 About
                 <About />
@@ -38,8 +59,8 @@ const Navbar = ({ logOut, auth: { isAuthenticated, loading, user } }) => {
             </ul>
           </div>
         </div>
-        <div>
-          <h2 className="logo">thePantry</h2>
+        <div className="logo">
+          <h2 onClick={e => returnHome() }>thePantry</h2>
         </div>
       </div>
     </Fragment>

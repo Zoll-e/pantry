@@ -41,6 +41,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   }
 };
 
+//Load user
 export const loadUser = () => async dispatch => {
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);

@@ -13,6 +13,7 @@ export const GET_RECIPES = "GET_RECIPES";
 export const RECIPES_FAIL = "RECIPES_FAIL";
 export const GET_RECIPE = "GET_RECIPE";
 export const RECIPE_ADDED="RECIPE_ADDED";
+export const UPDATE_LIKES="UPDATE_LIKES";
 //errors
 export const GET_ERRORS = "GET_ERRORS";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";

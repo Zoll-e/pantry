@@ -2,9 +2,10 @@ import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { getRecipe } from "../../actions/recipe";
 import { connect } from "react-redux";
-import Picture from "../recipes/Picture";
+import NotFound from "../../utils/NotFound";
+import { Loading } from "../../utils/Loading";
 
-const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
+const RecipeShow = ({ recipe: {  loading,recipe }, getRecipe, match }) => {
   useEffect(() => {
     getRecipe(match.params.id);
   }, [getRecipe, match.params.id]);
@@ -12,12 +13,11 @@ const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
   const pictureStyles = { height: "800px" };
   return (
     <div>
-      {recipe && (
+      {loading ? <Loading /> : recipe ? (
         <Fragment>
-          <div className="container">
-            <Picture
-              src={`/${recipe.picture}`}
-              styles={pictureStyles}
+          <div >
+            <div
+            style={{margin:"auto",marginTop:"3rem",backgroundSize:"cover",backgroundImage:`URL(/${recipe.picture})`,height:"55rem",width:"85vw"}}
               classes="col-12 row"
             />
             <div>
@@ -25,7 +25,7 @@ const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
               <h4>{recipe.intro}</h4>
               <h4>Ingredients</h4>
               {recipe.ingredients.map(ingredient => (
-                <h5>{ingredient}</h5>
+                <h5>{ingredient.ingredient_name}</h5>
               ))}
               <h4>{recipe.description}</h4>
               <h5>Rate it if you like it</h5>
@@ -34,7 +34,7 @@ const RecipeShow = ({ recipe: { loading, recipe }, getRecipe, match }) => {
             </div>
           </div>
         </Fragment>
-      )}
+      ):(<NotFound />)}
     </div>
   );
 };

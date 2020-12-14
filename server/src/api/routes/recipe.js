@@ -25,7 +25,6 @@ router.post(
     check("intro", "Write a short intro of this recipe").not().isEmpty(),
     check("description", "Please provide instructions").not().isEmpty(),
     check("picture", "Please upload a picture").not().isEmpty(),
-
   ],
   passport.authenticate("jwt", { session: false }),
 
@@ -100,7 +99,7 @@ router.post(
   }
 );
 
-// Like recipe
+// Like/Unlike recipe
 router.put(
   "/like/:recipe_id",
   passport.authenticate("jwt", { session: false }),
@@ -113,47 +112,23 @@ router.put(
         recipe.likes.filter(like => like.user.toString() === req.user.id)
           .length > 0
       ) {
-        return res.status(400).json({ msg: "Recipe already liked" });
-      }
+        //Unlike post
+        const removeindex = recipe.likes
+          .map(like => like.user.toString())
+          .indexOf(req.user.id);
+        recipe.likes.splice(removeindex, 1);
+
+        await recipe.save();
+
+         res.json(recipe.likes);
+      }else {
+        //Like post
       recipe.likes.unshift({ user: req.user.id });
 
       await recipe.save();
 
       res.json(recipe.likes);
-    } catch (err) {
-      console.error(err.message);
-      if (err.kind === "ObjectId") {
-        return res.status(404).json({ msg: "Recipe not found" });
       }
-      res.status(500).send("Server error");
-    }
-  }
-);
-
-// Unlike recipe
-router.put(
-  "/unlike/:recipe_id",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    try {
-      const recipe = await Recipe.findById(req.params.recipe_id);
-
-      // Check if the post has yet to be liked
-      if (
-        !recipe.likes.filter(like => like.user.toString() === req.user.id)
-          .length > 0
-      ) {
-        return res.status(400).send("Yet to be liked");
-      }
-
-      const removeindex = recipe.likes
-        .map(like => like.user.toString())
-        .indexOf(req.user.id);
-      recipe.likes.splice(removeindex, 1);
-
-      await recipe.save();
-
-      res.json(recipe.likes);
     } catch (err) {
       console.error(err.message);
       if (err.kind === "ObjectId") {
@@ -178,6 +153,7 @@ router.get("/userrecipes/:user_id", async (req, res) => {
 router.get("/:recipe_id", async (req, res) => {
   try {
     const recipe = await Recipe.findById({ _id: req.params.recipe_id });
+
     return res.json(recipe);
   } catch (err) {
     console.error(err.message);

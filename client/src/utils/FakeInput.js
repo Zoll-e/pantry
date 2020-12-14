@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Fakeinput = ({
   label,
@@ -13,7 +13,7 @@ const Fakeinput = ({
 
   return (
     <div>
-      <label>{label}</label>
+      <label className={`${errors ? "invalid-label":""}`}>{errors ? errors.msg : label}</label>
       <input
         autoFocus={autoFocus}
     type={type}
@@ -23,7 +23,6 @@ const Fakeinput = ({
         value={value}
         onChange={onChange}
       />
-      {errors && <p>{errors.msg}</p>}
     </div>
   );
 };

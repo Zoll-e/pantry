@@ -1,32 +1,31 @@
-import React, { Fragment,useState,useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { getRecipes } from "../../actions/recipe";
+import { getRecipes ,likeRecipe} from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
 import { Loading } from "../../utils/Loading";
+import ViewRecipe from "../recipe/ViewRecipe";
 
-const Recipes = ({ recipes: { recipes, loading },getRecipes }) => {
-
+const Recipes = ({ getRecipes,recipe: { recipes, loading } }) => {
   const [search, setSearch] = useState("");
 
-  useEffect(()=>{
-      getRecipes(search);
+  useEffect(() => {
+    getRecipes(search);
   },[getRecipes,search]);
 
   const onChange = async e => {
     setSearch(e.target.value);
   };
-
+  
   return (
-    <Fragment>
+    <div>
+
       {loading ? (
         <Loading />
       ) : (
         <div className="header">
-          
           <div className="text-box">
-            
             <h1 className="heading-primary">
               <span className="heading-primary-sub">
                 search for any dish comes to your mind{" "}
@@ -34,29 +33,35 @@ const Recipes = ({ recipes: { recipes, loading },getRecipes }) => {
             </h1>
             <SearchRecipe search={search} onChange={onChange} />
           </div>
-          
         </div>
-        
       )}
 
-      <div className="row container">
+      <div
+        style={{
+          display: "flex",
+          flexWrap:"wrap",
+          justifyContent:"center",
+        }}
+      >
         {recipes &&
           !loading &&
           recipes.map(recipe => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
+          <i aria-hidden="true" style={{width:"45%",height:"200px",margin:"2%"}}></i>
       </div>
-
-    </Fragment>
+    </div>
   );
 };
 
-Recipes.propTypes = {
-  getRecipes: PropTypes.func.isRequired,
-  recipes: PropTypes.object.isRequired,
-};
 const mapStateToProps = state => ({
-  recipes: state.recipes,
+  recipe: state.recipe,
 });
 
-export default connect(mapStateToProps, { getRecipes })(Recipes);
+Recipes.propTypes = {
+  getRecipes: PropTypes.func.isRequired,
+  recipe: PropTypes.object.isRequired,
+};
+
+
+export default connect(mapStateToProps, { likeRecipe,getRecipes })(Recipes);

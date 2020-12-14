@@ -1,15 +1,20 @@
 import axios from "axios";
-import { GET_RECIPES, RECIPES_FAIL, RECIPE_ADDED,GET_RECIPE,GET_ERRORS } from "./types";
+import {
+  GET_RECIPES,
+  RECIPES_FAIL,
+  RECIPE_ADDED,
+  GET_RECIPE,
+  GET_ERRORS,
+  UPDATE_LIKES,
+} from "./types";
 
 export const getRecipe = id => async dispatch => {
   try {
-    console.log(id);
     let res = await axios.get(`/api/recipe/${id}`);
-    console.log(res.data);
 
     dispatch({ type: GET_RECIPE, payload: res.data });
   } catch (error) {
-    dispatch({type:RECIPES_FAIL});
+    dispatch({ type: RECIPES_FAIL });
   }
 };
 export const getRecipes = search => async dispatch => {
@@ -26,6 +31,16 @@ export const getRecipes = search => async dispatch => {
   }
 };
 
+export const likeRecipe = recipeid => async dispatch => {
+  try {
+    const res = await axios.put(`/api/recipe/like/${recipeid}`);
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { recipeid, likes: res.data },
+    });
+  } catch (error) {}
+};
+
 export const addRecipe = ({
   dish,
   description,
@@ -39,17 +54,15 @@ export const addRecipe = ({
     },
   };
 
-  const body = {dish,description,intro,picture,ingredients};
+  const body = { dish, description, intro, picture, ingredients };
   try {
-    
-
-    const res = await axios.post("/api/recipe",body, config);
-    dispatch({type: RECIPE_ADDED,payload:res.data});
+    const res = await axios.post("/api/recipe", body, config);
+    dispatch({ type: RECIPE_ADDED, payload: res.data });
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      dispatch({type:GET_ERRORS,payload:errors});
+      dispatch({ type: GET_ERRORS, payload: errors });
     }
-    dispatch({type:RECIPES_FAIL})
+    dispatch({ type: RECIPES_FAIL });
   }
 };

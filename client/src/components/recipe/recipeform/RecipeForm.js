@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import AddIngredient from "./AddIngredient";
 import { Ingredient } from "./Ingredient";
-import Fakeinput from "../../../utils/Fakeinput";
+import FakeInput from "../../../utils/Fakeinput";
 
 const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }) => {
   const [ingredientsArray, setIngredients] = useState([]);
@@ -59,7 +59,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
       ))}
       <form onSubmit={onSubmit}>
         <div className="col-4 offset-1">
-          <Fakeinput
+          <FakeInput
             type="text"
             name="dish"
             placeholder="Enter the name of your recipe"
@@ -69,7 +69,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
           />
         </div>
         <div className="col-4 offset-1">
-          <Fakeinput
+          <FakeInput
             type="text"
             name="description"
             placeholder="Enter description"
@@ -79,7 +79,7 @@ const RecipeForm = ({ addRecipe,errors,removeErrors, image: { loading, route } }
           />
         </div>
         <div className="col-4 offset-1">
-          <Fakeinput
+          <FakeInput
             type="text"
             name="intro"
             placeholder="Enter an intro to your recipe"

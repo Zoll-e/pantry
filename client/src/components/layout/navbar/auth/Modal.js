@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import groceries from "../../../../../groceries.jpeg";
-import Auth from "../auth/Auth";
+import groceries from "../../../../groceries.jpeg";
+import Auth from "./Auth"
 
 const Modal = ({ setDisplay }) => {
   
@@ -40,6 +40,7 @@ const Modal = ({ setDisplay }) => {
       <div id="modal" ref={node}>
         <div
           style={{
+
             display: "inline-block",
             float: "left",
             width: "50%",

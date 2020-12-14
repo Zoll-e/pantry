@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 
 const app = express();
 
+app.use("/cv", express.static("cv"));
 app.use("/uploads", express.static("uploads"));
 
 // Connect db
