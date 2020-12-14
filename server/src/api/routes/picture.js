@@ -13,8 +13,8 @@ var storage = multer.diskStorage({
   },
 
   filename: function (req, file, cb) {
-    if (!file.originalname.match(/\.(jpeg|jpg|png|mp4|avi)$/)) {
-      cb(new Error("only upload files with jpg or jpeg format."));
+    if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
+      cb(new Error("only upload files with jpg, jpeg, png format."));
     } else {
       cb(null, Date.now() + path.extname(file.originalname));
     }
