@@ -58,8 +58,9 @@ export const addRecipe = ({
   try {
     const res = await axios.post("/api/recipe", body, config);
     dispatch({ type: RECIPE_ADDED, payload: res.data });
+    window.location = `/recipe/${res.data._id}`
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.res.data.errors;
     if (errors) {
       dispatch({ type: GET_ERRORS, payload: errors });
     }

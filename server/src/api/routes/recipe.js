@@ -2,7 +2,6 @@ const express = require("express");
 const passport = require("passport");
 const { check, validationResult } = require("express-validator");
 const Recipe = require("../../model/Recipe");
-const { Router } = require("express");
 const Photo = require("../../model/Photo");
 const router = express.Router();
 

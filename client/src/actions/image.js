@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {IMAGE_UPLOADED, IMAGE_UPLOAD_FAIL,IMAGE_REMOVED,IMAGE_REMOVE_FAIL} from "./types";
 
-export const upload = picture => async dispatch => {
+export const upload = async picture => {
 
     const config = {
         headers: {
@@ -12,11 +12,11 @@ export const upload = picture => async dispatch => {
       const formData = new FormData();
       formData.append('picture', picture);
       const res = await axios.post('/api/picture', formData, config );
-      dispatch({ type: IMAGE_UPLOADED, payload: res.data });
-
+      const route = res.data;
+      return route;
 
           } catch (error) {
-            dispatch({type: IMAGE_UPLOAD_FAIL})
+            alert(error)
         }
   
 };
