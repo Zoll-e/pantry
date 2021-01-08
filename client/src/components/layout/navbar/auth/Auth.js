@@ -34,7 +34,7 @@ const Auth = ({
 
   const onSubmit = async e => {
     e.preventDefault();
-   isRegister ? register ({name, email,password}) : login({email,password});
+   isRegister ? register (name, email.toLowerCase(),password) : login(email.toLowerCase(),password);
   };
 
   const loginPage = (

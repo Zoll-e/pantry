@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { getRecipes, likeRecipe } from "../../actions/recipe";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
     <div>
       {loading ? (
         <Loading />
-      ) :  (
+      ) : (
         <div className="header">
           <div className="text-box">
             <h1 className="heading-primary">
@@ -35,15 +35,10 @@ const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
       )}
 
       <div
-        style={{
-          display: "flex-wrap",
-          flexDirection: "row",
-          justifyContent: "center",
-          marginLeft: "5%",
-        }}
+     className="recipeCardContainer"
       >
         {recipes &&
-          !loading && 
+          !loading &&
           recipes.map(recipe => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}

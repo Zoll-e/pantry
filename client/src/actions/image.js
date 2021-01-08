@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {IMAGE_UPLOADED, IMAGE_UPLOAD_FAIL,IMAGE_REMOVED,IMAGE_REMOVE_FAIL} from "./types";
+import {IMAGE_REMOVED,IMAGE_REMOVE_FAIL} from "./types";
 
 export const upload = async picture => {
 
@@ -16,7 +16,7 @@ export const upload = async picture => {
       return route;
 
           } catch (error) {
-            alert(error)
+            
         }
   
 };

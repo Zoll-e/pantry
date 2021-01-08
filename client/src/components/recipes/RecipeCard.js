@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -7,7 +7,7 @@ import { likeRecipe } from "../../actions/recipe";
 const RecipeCard = ({
   likeRecipe,
   auth: { isAuthenticated },
-  recipe: { _id, dish, description, intro,rating, likes, picture },
+  recipe: { _id, dish, direction, intro,rating, likes, picture },
 }) => {
   const history = useHistory();
 

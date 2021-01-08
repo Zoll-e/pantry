@@ -1,35 +1,62 @@
 import React, { useState, Fragment } from "react";
 
 function AddIngredient({ addItem }) {
-  const [item, setItem] = useState({
-    ingredient_name:"",
-    portion:"",
-  });
+  const [item, setItem] = useState({name:"",quantity:""});
   return (
     <Fragment>
-      <form>
-        <p>Add ingredient</p>
+      <div>
+        <p style={{ fontSize: "25px" }}> Quantity</p>
+
         <input
+          className="newRecipeIngredientInput"
+          spellCheck="false"
+          autoCorrect="off"
+          autoComplete="off"
           type="text"
-          name="ingredient_name"
-          onChange={e => setItem({ ...item,[e.target.name]: e.target.value })}
+          value={item.quantity}
+          name="quantity"
+          onChange={e => setItem({ ...item, [e.target.name]: e.target.value })}
         ></input>
-        <p>Portion</p>
+      </div>
+
+      <div>
+        <p style={{ fontSize: "25px" }}> Ingredient</p>
+
         <input
+          className="newRecipeIngredientInput"
           type="text"
-          name="portion"
-          onChange={e => setItem({ ...item,[e.target.name]: e.target.value })}
+          spellCheck="false"
+          autoCorrect="off"
+          autoComplete="off"
+          value={item.name}
+          name="name"
+          onChange={e => setItem({ ...item, [e.target.name]: e.target.value })}
         ></input>
-        <button
-          type="submit"
-          onClick={e => {
-            e.preventDefault();
-            addItem(item);
-          }}
-        >
-          kuld
-        </button>
-      </form>
+      </div>
+      <div></div>
+      <button
+        style={{
+          height: "3em",
+          fontFamily: '"Architects Daughter", cursive',
+          textDecoration: "none",
+          width: "3em",
+          borderRadius: "50%",
+          marginTop:"3%",
+          backgroundColor: "#ffeaa7",
+          border: "none",
+          visibility:`${!(item.name !== "" && item.quantity !== "") ? "hidden":"visible"}`
+        }}
+        disabled={!(item.name !== "" && item.quantity !== "")}
+        onClick={e => {
+          e.preventDefault();
+
+          addItem(item);
+          setItem({name:"",quantity:""});
+        }}
+      >
+        +
+      </button>
+      
     </Fragment>
   );
 }

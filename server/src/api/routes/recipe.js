@@ -22,7 +22,7 @@ router.post(
   [
     check("dish", "What's your dish called").not().isEmpty(),
     check("intro", "Write a short intro of this recipe").not().isEmpty(),
-    check("description", "Please provide instructions").not().isEmpty(),
+    check("directions", "Please provide instructions").not().isEmpty(),
     check("picture", "Please upload a picture").not().isEmpty(),
   ],
   passport.authenticate("jwt", { session: false }),
@@ -33,15 +33,19 @@ router.post(
       return res.status(400).json({ errors: errors.mapped() });
     }
 
-    const { dish, intro, description, ingredients, picture } = req.body;
+    const { dish, intro, directions, ingredients, picture } = req.body;
 
     recipeFields = {};
     recipeFields.user = req.user.id;
 
     if (dish) recipeFields.dish = dish;
     if (intro) recipeFields.intro = intro;
-    if (description) recipeFields.description = description;
     if (picture) recipeFields.picture = picture;
+    //add directions
+    directionFields = [];
+    if (directions)
+    directions.map(direction => directionFields.push(direction));
+    recipeFields.directions = directionFields;
     // Add ingredients
     ingredientFields = [];
     if (ingredients)
@@ -66,13 +70,13 @@ router.post(
       return res.json({ errors: errors.array() });
     }
 
-    const { dish, intro, description, ingredients } = req.body;
+    const { dish, intro, directions, ingredients } = req.body;
 
     recipeFields = {};
 
     if (dish) recipeFields.dish = dish;
     if (intro) recipeFields.intro = intro;
-    if (description) recipeFields.description = description;
+    if (directions) recipeFields.directions = directions;
     if (picture) recipeFields.picture = picture;
 
     // Add ingredients

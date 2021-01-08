@@ -27,7 +27,7 @@ const RecipeShow = ({ recipe: {  loading,recipe }, getRecipe, match }) => {
               {recipe.ingredients.map(ingredient => (
                 <h5>{ingredient.ingredient_name}</h5>
               ))}
-              <h4>{recipe.description}</h4>
+              <h4>{recipe.direction}</h4>
               <h5>Rate it if you like it</h5>
               <h5>Like recipe</h5>
               <h5>Leave a comment</h5>

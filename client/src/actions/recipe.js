@@ -43,7 +43,7 @@ export const likeRecipe = recipeid => async dispatch => {
 
 export const addRecipe = ({
   dish,
-  description,
+  directions,
   intro,
   picture,
   ingredients,
@@ -54,13 +54,14 @@ export const addRecipe = ({
     },
   };
 
-  const body = { dish, description, intro, picture, ingredients };
+  const body = { dish, directions, intro, picture, ingredients };
   try {
     const res = await axios.post("/api/recipe", body, config);
     dispatch({ type: RECIPE_ADDED, payload: res.data });
     window.location = `/recipe/${res.data._id}`
   } catch (err) {
-    const errors = err.res.data.errors;
+    console.log(err.response.data.errors)
+    const errors = err.response.data.errors;
     if (errors) {
       dispatch({ type: GET_ERRORS, payload: errors });
     }

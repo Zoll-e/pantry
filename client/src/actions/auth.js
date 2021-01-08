@@ -14,7 +14,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 // Register user
 
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ( name, email, password ) => async dispatch => {
   const config = {
     header: {
       Authorization: {
@@ -63,7 +63,7 @@ export const loadUser = () => async dispatch => {
 };
 
 // Login user
-export const login = ({ email, password }) => async dispatch => {
+export const login = ( email, password ) => async dispatch => {
   const config = {
     header: {
       "Content-Type": "application/json",
