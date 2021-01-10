@@ -19,12 +19,15 @@ const RecipeSchema = new mongoose.Schema({
 
   ingredients: [
     {
-      ingredient_name: {
+      name: {
         type: String,
       },
-      portion: {
-        type: String,
+      quantity: {
+        type: Number,
       },
+      unit:{
+        type:String,
+      }
     },
   ],
   range: {

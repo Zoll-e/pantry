@@ -10,7 +10,7 @@ import { upload } from "../../../actions/image";
 
 const RecipeForm = ({ addRecipe, errors, removeErrors }) => {
   const [ingredientsArray, setIngredients] = useState([]);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
 
   const [directionArray, setDirectionArray] = useState([]);
   const [direction, setDirection] = useState("");
@@ -109,7 +109,7 @@ const RecipeForm = ({ addRecipe, errors, removeErrors }) => {
               <textarea
                 className="newRecipeIntro"
                 type="text"
-                maxLength="180"
+                maxLength="300"
                 name="intro"
                 spellCheck="false"
                 value={intro}
@@ -228,7 +228,7 @@ const RecipeForm = ({ addRecipe, errors, removeErrors }) => {
             </button>
             <button
               className="nextButton"
-              disabled={directionArray.length < 1 ? true : false}
+              disabled={direction ==="" ? true : false}
               type="submit"
               onClick={e => {
                 direction !== "" && directionArray.push(direction);

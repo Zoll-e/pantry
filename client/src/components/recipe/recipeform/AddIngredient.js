@@ -1,7 +1,9 @@
 import React, { useState, Fragment } from "react";
+import ingredienList from "./ingredientList";
 
 function AddIngredient({ addItem }) {
-  const [item, setItem] = useState({name:"",quantity:""});
+  const [item, setItem] = useState({ name: "", quantity: "", unit: "adag" });
+
   return (
     <Fragment>
       <div>
@@ -12,11 +14,28 @@ function AddIngredient({ addItem }) {
           spellCheck="false"
           autoCorrect="off"
           autoComplete="off"
-          type="text"
+          type="number"
           value={item.quantity}
           name="quantity"
           onChange={e => setItem({ ...item, [e.target.name]: e.target.value })}
         ></input>
+      </div>
+
+      <div>
+        <label>
+          Pick a unit of measure
+        <select
+          className="newRecipeIngredientInput"
+          name="unit"
+          value={item.unit}
+          onClick={e => console.log(item.unit)}
+          onChange={e => setItem({ ...item, [e.target.name]: e.target.value })}
+        >
+          {ingredienList.map((e, index) => (
+            <option key={index}>{e}</option>
+          ))}
+        </select>
+        </label>
       </div>
 
       <div>
@@ -41,22 +60,27 @@ function AddIngredient({ addItem }) {
           textDecoration: "none",
           width: "3em",
           borderRadius: "50%",
-          marginTop:"3%",
+          marginTop: "3%",
           backgroundColor: "#ffeaa7",
           border: "none",
-          visibility:`${!(item.name !== "" && item.quantity !== "") ? "hidden":"visible"}`
+          visibility: `${
+            !(item.name !== "" && item.quantity !== "" && item.unit !== "")
+              ? "hidden"
+              : "visible"
+          }`,
         }}
-        disabled={!(item.name !== "" && item.quantity !== "")}
+        disabled={
+          !(item.name !== "" && item.quantity !== "" && item.unit !== "")
+        }
         onClick={e => {
           e.preventDefault();
 
           addItem(item);
-          setItem({name:"",quantity:""});
+          setItem({ name: "", quantity: "",unit:item.unit });
         }}
       >
         +
       </button>
-      
     </Fragment>
   );
 }

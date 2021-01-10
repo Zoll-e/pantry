@@ -42,7 +42,7 @@ export const Ingredient = ({ removeItem, id, ingredient }) => {
             transform: "translateY(-50%)",
           }}
         >
-          {ingredient.quantity} - {ingredient.name}
+          {ingredient.quantity} {ingredient.unit} - {ingredient.name}
         </p>
       </div>
     </Fragment>
