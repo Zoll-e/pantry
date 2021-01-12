@@ -8,7 +8,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Navbar from "./components/layout/navbar/main/Navbar";
 import RecipeForm from "./components/recipe/recipeform/RecipeForm";
 import RecipeShow from "./components/recipe/RecipeShow";
-import NotFound from "./utils/NotFound";
+
 
 // Redux
 import { Provider } from "react-redux";
@@ -31,7 +31,6 @@ const App = () => {
               <Route exact path="/" component={Recipes} />
               <Route exact path="/recipe/:id" component={RecipeShow} />
               <PrivateRoute exact path="/add-recipe" component={RecipeForm} />
-              <Route component={NotFound} />
             </Switch>
           </Fragment>
         </Router>

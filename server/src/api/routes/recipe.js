@@ -3,6 +3,7 @@ const passport = require("passport");
 const { check, validationResult } = require("express-validator");
 const Recipe = require("../../model/Recipe");
 const Photo = require("../../model/Photo");
+const Profile = require("../../model/Profile");
 const router = express.Router();
 
 // Get all recipes
@@ -44,7 +45,7 @@ router.post(
     //add directions
     directionFields = [];
     if (directions)
-    directions.map(direction => directionFields.push(direction));
+      directions.map(direction => directionFields.push(direction));
     recipeFields.directions = directionFields;
     // Add ingredients
     ingredientFields = [];
@@ -122,15 +123,16 @@ router.put(
         recipe.likes.splice(removeindex, 1);
 
         await recipe.save();
-
-         res.json(recipe.likes);
-      }else {
+        //Update profile
+        
+        res.json(recipe.likes);
+      } else {
         //Like post
-      recipe.likes.unshift({ user: req.user.id });
+        recipe.likes.unshift({ user: req.user.id });
+        
+        await recipe.save();
 
-      await recipe.save();
-
-      res.json(recipe.likes);
+        res.json(recipe.likes);
       }
     } catch (err) {
       console.error(err.message);

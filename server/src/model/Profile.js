@@ -7,7 +7,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    required: true,
+    
   },
   location: {
     type: String,
@@ -16,7 +16,14 @@ const ProfileSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  
+  likedRecipes: [
+    {
+      recipe: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "recipe",
+      },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

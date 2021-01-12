@@ -80,13 +80,10 @@ router.post(
     "/",
     [
       passport.authenticate("jwt", { session: false }),
-      // [check("bio", "Yout must add a short bio").not().isEmpty()],
+      //[check("bio", "Yout must add a short bio").not().isEmpty()],
     ],
     (req, res) => {
-      const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+
       const { bio, location, vegan } = req.body;
 
       const profileFields = {};
@@ -126,6 +123,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
+      
       // Delete recipes
       await Recipe.deleteMany({ user: req.user.id });
       // Delete profile

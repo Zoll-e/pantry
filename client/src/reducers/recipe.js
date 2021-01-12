@@ -38,11 +38,8 @@ export default function (state = initialState, action) {
       };
     case UPDATE_LIKES:
       return {
-        recipes: state.recipes.map(recipe =>
-          recipe._id === payload.recipeid
-            ? { ...recipe, likes: payload.likes }
-            : recipe
-        ),
+        ...state,
+        recipe: { ...state.recipe, likes:payload },
         loading: false,
       };
     case RECIPE_ADDED:

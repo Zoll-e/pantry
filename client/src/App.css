@@ -276,6 +276,7 @@ body {
   margin: auto;
   color: white;
   padding: 2rem;
+  top:0;
   cursor: pointer;
 }
 

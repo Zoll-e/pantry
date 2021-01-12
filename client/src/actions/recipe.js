@@ -30,15 +30,25 @@ export const getRecipes = search => async dispatch => {
     dispatch({ type: RECIPES_FAIL });
   }
 };
+export const getUserRecipes = userId => async dispatch => {
+  try {
+    let res = await axios.get(`/api/recipe/userrecipes/${userId}`);
 
+    dispatch({ type: GET_RECIPES, payload: { data: res.data } });
+  } catch (err) {
+    dispatch({ type: RECIPES_FAIL });
+  }
+};
 export const likeRecipe = recipeid => async dispatch => {
   try {
     const res = await axios.put(`/api/recipe/like/${recipeid}`);
     dispatch({
       type: UPDATE_LIKES,
-      payload: { recipeid, likes: res.data },
+      payload:   res.data ,
     });
-  } catch (error) {}
+  } catch (error) {
+    dispatch({ type: RECIPES_FAIL });
+  }
 };
 
 export const addRecipe = ({
@@ -58,9 +68,9 @@ export const addRecipe = ({
   try {
     const res = await axios.post("/api/recipe", body, config);
     dispatch({ type: RECIPE_ADDED, payload: res.data });
-    window.location = `/recipe/${res.data._id}`
+    window.location = `/recipe/${res.data._id}`;
   } catch (err) {
-    console.log(err.response.data.errors)
+    console.log(err.response.data.errors);
     const errors = err.response.data.errors;
     if (errors) {
       dispatch({ type: GET_ERRORS, payload: errors });
