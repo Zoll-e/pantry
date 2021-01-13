@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import Fakeinput from "../../../../utils/Fakeinput";
+import Fakeinput from "../../../../utils/FakeInput";
 import { removeErrors } from "../../../../actions/errors";
 import { login, register } from "../../../../actions/auth"
 import { connect } from "react-redux";
