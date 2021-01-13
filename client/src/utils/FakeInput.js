@@ -1,6 +1,6 @@
 import React from "react";
 
-const Fakeinput = ({
+const FakeInput = ({
   label,
   type,
   placeholder,
@@ -27,4 +27,4 @@ const Fakeinput = ({
   );
 };
 
-export default Fakeinput;
+export default FakeInput;
