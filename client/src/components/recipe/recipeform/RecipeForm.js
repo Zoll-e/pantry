@@ -10,7 +10,7 @@ import { upload } from "../../../actions/image";
 
 const RecipeForm = ({ addRecipe, errors, removeErrors }) => {
   const [ingredientsArray, setIngredients] = useState([]);
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
 
   const [directionArray, setDirectionArray] = useState([]);
   const [direction, setDirection] = useState("");
