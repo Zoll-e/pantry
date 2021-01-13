@@ -6,6 +6,8 @@ import {
   GET_RECIPE,
   GET_ERRORS,
   UPDATE_LIKES,
+  RATINGS_UPDATED,
+  RATING_UPDATE_ERROR,
 } from "./types";
 
 export const getRecipe = id => async dispatch => {
@@ -40,14 +42,30 @@ export const getUserRecipes = userId => async dispatch => {
   }
 };
 export const likeRecipe = recipeid => async dispatch => {
+ 
   try {
     const res = await axios.put(`/api/recipe/like/${recipeid}`);
     dispatch({
       type: UPDATE_LIKES,
-      payload:   res.data ,
+      payload: res.data,
     });
   } catch (error) {
     dispatch({ type: RECIPES_FAIL });
+  }
+};
+
+export const rateRecipe = (recipeid,rate) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+
+    const res = await axios.put(`/api/recipe/rate/${recipeid}`,{rate},config);
+    dispatch({ type: RATINGS_UPDATED, payload: res.data });
+  } catch (error) {
+    dispatch({ type: RATING_UPDATE_ERROR, payload: error });
   }
 };
 
@@ -70,7 +88,6 @@ export const addRecipe = ({
     dispatch({ type: RECIPE_ADDED, payload: res.data });
     window.location = `/recipe/${res.data._id}`;
   } catch (err) {
-    console.log(err.response.data.errors);
     const errors = err.response.data.errors;
     if (errors) {
       dispatch({ type: GET_ERRORS, payload: errors });

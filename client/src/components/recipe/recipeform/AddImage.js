@@ -7,9 +7,6 @@ const AddImage = ({ image, setImage, errors }) => {
   };
 
   const inputFile = useRef(null);
-  const onClick = () => {
-    inputFile.current.click();
-  };
 
   return (
     <Fragment>
@@ -25,12 +22,13 @@ const AddImage = ({ image, setImage, errors }) => {
       <div>
         <img
         style={{borderRadius:"5px"}}
+
           src={
             image
               ? URL.createObjectURL(image)
               : backGround
           }
-          onClick={onClick}
+          onClick={() => inputFile.current.click()}
           alt="4234"
           className="newRecipeAddImage"
         ></img>

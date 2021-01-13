@@ -4,6 +4,7 @@ import {
   GET_RECIPE,
   UPDATE_LIKES,
   RECIPE_ADDED,
+  RATINGS_UPDATED
 } from "../actions/types";
 
 const initialState = {
@@ -42,6 +43,13 @@ export default function (state = initialState, action) {
         recipe: { ...state.recipe, likes:payload },
         loading: false,
       };
+
+      case RATINGS_UPDATED:
+        return{
+          ...state,
+          recipe: {...state.recipe,rating:payload},
+          loading:false,
+        }
     case RECIPE_ADDED:
       return {
         ...state,

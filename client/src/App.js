@@ -7,7 +7,7 @@ import Recipes from "./components/recipes/Recipes";
 import PrivateRoute from "./utils/PrivateRoute";
 import Navbar from "./components/layout/navbar/main/Navbar";
 import RecipeForm from "./components/recipe/recipeform/RecipeForm";
-import RecipeShow from "./components/recipe/RecipeShow";
+import RecipeShow from "./components/recipe/recipeshow/RecipeShow";
 
 
 // Redux

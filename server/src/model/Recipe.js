@@ -13,9 +13,11 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  directions: [{
-    type: String,
-  }],
+  directions: [
+    {
+      type: String,
+    },
+  ],
 
   ingredients: [
     {
@@ -25,15 +27,27 @@ const RecipeSchema = new mongoose.Schema({
       quantity: {
         type: Number,
       },
-      unit:{
-        type:String,
-      }
+      unit: {
+        type: String,
+      },
     },
   ],
   range: {
     type: Number,
   },
-  rating: { type: Number, default: 0 },
+
+  rating: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+      rate: {
+        type: Number,
+      },
+    },
+  ],
+
   prep_time: { type: String },
   cook_time: { type: String },
   category: [{ type: String }],

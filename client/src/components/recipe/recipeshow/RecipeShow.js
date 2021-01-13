@@ -1,9 +1,9 @@
 import React, { useEffect, Fragment, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { getRecipe, likeRecipe } from "../../actions/recipe";
+import { getRecipe, likeRecipe, rateRecipe } from "../../../actions/recipe";
 import { connect } from "react-redux";
 
-import { Loading } from "../../utils/Loading";
+import { Loading } from "../../../utils/Loading";
 import Star from "./Star";
 
 const RecipeShow = ({
@@ -11,6 +11,8 @@ const RecipeShow = ({
   recipe: { loading, recipe },
   likeRecipe,
   match,
+  auth,
+  rateRecipe,
 }) => {
   const [height, setHeight] = useState(0);
   useEffect(() => {
@@ -30,24 +32,35 @@ const RecipeShow = ({
 
   const ref = useRef(null);
 
-  const [hoverIndex, setHoverIndex] = useState(null);
   var stars = [];
-  if (recipe) {
+
+  const [rate, setRate] = useState(-1);
+
+  if (recipe && auth.user) {
+
+    var recipeRating = recipe.rating.reduce((sum, rating) => sum + rating.rate, 0);
+
+    var userRating = 0;
+    recipe.rating.map(e => e.user === auth.user._id && (userRating = e.rate));
+console.log(Math.round(recipeRating/recipe.rating.length));
+
     for (let i = 1; i < 6; i++) {
       stars.push(
         <Star
           key={i}
-          filled={
-            hoverIndex
-              ? hoverIndex >= i
+          recipeId={recipe._id}
+          isFilled={
+            rate === -1
+              ? userRating >= i
                 ? true
                 : false
-              : recipe.rating >= i
+              : rate >= i
               ? true
               : false
           }
           index={i}
-          setHoverIndex={setHoverIndex}
+          rateRecipe={rateRecipe}
+          setRate={setRate}
         />
       );
     }
@@ -166,11 +179,16 @@ const RecipeShow = ({
 
 const mapStateToProps = state => ({
   recipe: state.recipe,
+  auth: state.auth,
 });
 RecipeShow.propTypes = {
   getRecipe: PropTypes.func.isRequired,
   recipe: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   likeRecipe: PropTypes.func.isRequired,
+  rateRecipe: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { likeRecipe, getRecipe })(RecipeShow);
+export default connect(mapStateToProps, { likeRecipe, rateRecipe, getRecipe })(
+  RecipeShow
+);

@@ -123,13 +123,12 @@ router.put(
         recipe.likes.splice(removeindex, 1);
 
         await recipe.save();
-        //Update profile
-        
+
         res.json(recipe.likes);
       } else {
         //Like post
         recipe.likes.unshift({ user: req.user.id });
-        
+
         await recipe.save();
 
         res.json(recipe.likes);
@@ -140,6 +139,42 @@ router.put(
         return res.status(404).json({ msg: "Recipe not found" });
       }
       res.status(500).send("Server error");
+    }
+  }
+);
+//Rate recipe
+router.put(
+  "/rate/:recipe_id",
+
+  passport.authenticate("jwt", { session: false }),
+
+  async (req, res) => {
+    
+    try {
+      const recipe = await Recipe.findOne({ _id: req.params.recipe_id });
+
+      //Check if user already rated the recipe
+      if (
+        !recipe.rating.filter(rating => rating.user == req.user.id).length > 0
+      ) {
+        //Add rating
+        recipe.rating.unshift({ user: req.user.id, rate: req.body.rate });
+      } else {
+        //Update rating
+
+        recipe.rating.map(
+          rating =>
+            rating.user == req.user.id &&
+            (rating.rate === req.body.rate
+              ? (rating.rate = 0)
+              : (rating.rate = req.body.rate))
+        );
+      }
+
+      await recipe.save();
+      res.json(recipe.rating);
+    } catch (error) {
+      console.log(error);
     }
   }
 );

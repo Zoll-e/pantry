@@ -14,6 +14,8 @@ export const RECIPES_FAIL = "RECIPES_FAIL";
 export const GET_RECIPE = "GET_RECIPE";
 export const RECIPE_ADDED="RECIPE_ADDED";
 export const UPDATE_LIKES="UPDATE_LIKES";
+export const RATINGS_UPDATED ="RATINGS_UPDATED";
+export const RATING_UPDATE_ERROR = "RATING_UPDATE_ERROR";
 //errors
 export const GET_ERRORS = "GET_ERRORS";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
@@ -24,4 +26,5 @@ export const IMAGE_UPLOADED = "IMAGE_UPLOADED";
 export const IMAGE_UPLOAD_FAIL = "IMAGE_UPLOAD_FAIL";
 export const IMAGE_REMOVED = "IMAGE_REMOVED";
 export const IMAGE_REMOVE_FAIL = "IMAGE_REMOVE_FAIL";
+
 

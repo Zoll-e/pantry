@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getRecipes, likeRecipe,getUserRecipes } from "../../actions/recipe";
+import { getRecipes, likeRecipe } from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
 import { Loading } from "../../utils/Loading";
 
-const Recipes = ({ getRecipes,getUserRecipes,auth, recipe: { recipes, loading } }) => {
+const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-   auth.user && getUserRecipes(auth.user._id);
-  }, [getUserRecipes, auth,search]);
+    getRecipes(search);
+  }, [getRecipes,search]);
 
   const onChange = async e => {
     setSearch(e.target.value);
@@ -57,14 +57,14 @@ const Recipes = ({ getRecipes,getUserRecipes,auth, recipe: { recipes, loading } 
 
 const mapStateToProps = state => ({
   recipe: state.recipe,
-  auth: state.auth
+  
 });
 
 Recipes.propTypes = {
   getRecipes: PropTypes.func.isRequired,
   recipe: PropTypes.object.isRequired,
-  getUserRecipes:PropTypes.func.isRequired,
-  auth:PropTypes.object.isRequired,
+  
+  
 };
 
-export default connect(mapStateToProps, { likeRecipe,getUserRecipes, getRecipes })(Recipes);
+export default connect(mapStateToProps, { likeRecipe, getRecipes })(Recipes);

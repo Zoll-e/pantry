@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React  from "react";
 
-function Star({ filled, index,setHoverIndex }) {
+function Star({ isFilled, setRate,rateRecipe, index,recipeId }) {
   return (
     <div
-      onMouseEnter={e => {setHoverIndex(index)}}
-      onMouseLeave={e => {setHoverIndex(null)
-      }}
+      onMouseEnter={e => setRate(index)}
+      onMouseLeave={e => setRate(-1)}
+      onClick={e=>rateRecipe(recipeId,index)}
     >
       <div
         style={{
-          backgroundColor: `${filled ? "orange" : "gray"}`,
+          backgroundColor: `${isFilled ? "orange" : "gray"}`,
           height: "4ch",
           width: "4ch",
           clipPath:
