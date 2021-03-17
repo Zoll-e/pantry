@@ -4,7 +4,7 @@ const Recipe = require("../../model/Recipe");
 const User = require("../../model/User");
 const passport = require("passport");
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
+const fs = require("fs");
 
 // Get profile
 /* router.get(
@@ -83,7 +83,6 @@ router.post(
       //[check("bio", "Yout must add a short bio").not().isEmpty()],
     ],
     (req, res) => {
-
       const { bio, location, vegan } = req.body;
 
       const profileFields = {};
@@ -123,7 +122,8 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      
+      const recipes = await Recipe.find({ user: req.user.id });
+      recipes.map(recipe => fs.unlinkSync(recipe.picture));
       // Delete recipes
       await Recipe.deleteMany({ user: req.user.id });
       // Delete profile

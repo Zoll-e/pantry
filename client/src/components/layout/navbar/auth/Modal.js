@@ -1,24 +1,23 @@
 import React, { useEffect, useRef } from "react";
 import groceries from "../../../../groceries.jpeg";
-import Auth from "./Auth"
+import Auth from "./Auth";
 
-const Modal = ({ setDisplay }) => {
-  
+
+const Modal = ({ setDisplay, display }) => {
   const node = useRef();
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClick);
     var mod = document.body.style;
-    document.getElementById("content").style.display = "none";
-    mod.overflow = "hidden";
-    
+   
+      document.addEventListener("mousedown", handleClick);
+      mod.backgroundColor = "";
+
+
     return () => {
       document.removeEventListener("mousedown", handleClick);
-      document.getElementById("content").style.display = "";
-      mod.overflow = "visible";
+      mod.position = "visible";
     };
   });
-
 
   const handleClick = e => {
     if (!node.current.contains(e.target)) {
@@ -30,6 +29,7 @@ const Modal = ({ setDisplay }) => {
   return (
     <div
       style={{
+        display: `${display ? "" : "none"}`,
         position: "absolute",
         height: "100rem",
         width: "100%",
@@ -40,14 +40,13 @@ const Modal = ({ setDisplay }) => {
       <div id="modal" ref={node}>
         <div
           style={{
-
             display: "inline-block",
             float: "left",
             width: "50%",
             height: "100%",
           }}
         >
-          <Auth setDisplay={setDisplay}/>
+          <Auth setDisplay={setDisplay} />
         </div>
         <div
           style={{
@@ -71,6 +70,5 @@ const Modal = ({ setDisplay }) => {
     </div>
   );
 };
-
 
 export default Modal;

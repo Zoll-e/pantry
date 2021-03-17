@@ -4,7 +4,7 @@ const SearchRecipe = ({ search, onChange }) => {
   return (
     <Fragment>
       <input
-        className="header-primary-input"
+        className="search-bar"
         type="text"
         size="90"
         autoComplete="off"

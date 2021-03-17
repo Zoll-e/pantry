@@ -18,7 +18,10 @@ const RecipeSchema = new mongoose.Schema({
       type: String,
     },
   ],
-
+  vegan: {
+    type: Boolean,
+    default: false,
+  },
   ingredients: [
     {
       name: {

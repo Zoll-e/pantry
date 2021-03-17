@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator");
 const Recipe = require("../../model/Recipe");
 const Photo = require("../../model/Photo");
 const Profile = require("../../model/Profile");
+const mongoose = require("mongoose");
 const router = express.Router();
 
 // Get all recipes
@@ -117,16 +118,17 @@ router.put(
           .length > 0
       ) {
         //Unlike post
-        const removeindex = recipe.likes
+        const removelikeindex = recipe.likes
           .map(like => like.user.toString())
           .indexOf(req.user.id);
-        recipe.likes.splice(removeindex, 1);
+        recipe.likes.splice(removelikeindex, 1);
 
         await recipe.save();
 
         res.json(recipe.likes);
       } else {
         //Like post
+
         recipe.likes.unshift({ user: req.user.id });
 
         await recipe.save();
@@ -149,7 +151,6 @@ router.put(
   passport.authenticate("jwt", { session: false }),
 
   async (req, res) => {
-    
     try {
       const recipe = await Recipe.findOne({ _id: req.params.recipe_id });
 
@@ -178,7 +179,22 @@ router.put(
     }
   }
 );
+// Get liked recipes
+router.get(
+  "/likedrecipes",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const recipes = await Recipe.find({
+        likes: { $elemMatch: { user: req.user.id.toString() } },
+      });
 
+      return res.json(recipes);
+    } catch (error) {
+      res.status(500).send("Server error");
+    }
+  }
+);
 // Get recipes by user_id
 router.get("/userrecipes/:user_id", async (req, res) => {
   try {
@@ -218,8 +234,9 @@ router.delete(
       }
       if (recipe.picture) {
         try {
-          const photo = await Photo.findOne({ _id: recipe.picture });
-          photo.delete();
+          await fs.unlinkSync(recipe.picture);
+          
+          
         } catch (error) {
           console.log("picture not found, deleting recipe anyway");
         }

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import Recipes from "./components/recipes/Recipes";
+import Profile from "./components/profile/Profile"
 import PrivateRoute from "./utils/PrivateRoute";
 import Navbar from "./components/layout/navbar/main/Navbar";
 import RecipeForm from "./components/recipe/recipeform/RecipeForm";
@@ -29,6 +30,8 @@ const App = () => {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Recipes} />
+              <Route exact path="/profile" component={Profile} />
+
               <Route exact path="/recipe/:id" component={RecipeShow} />
               <PrivateRoute exact path="/add-recipe" component={RecipeForm} />
             </Switch>

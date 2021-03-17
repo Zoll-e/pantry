@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getRecipes, likeRecipe } from "../../actions/recipe";
+import { getRecipes, likeRecipe, getUserRecipes } from "../../actions/recipe";
 import { connect } from "react-redux";
 import SearchRecipe from "./SearchRecipe";
 import RecipeCard from "./RecipeCard";
 import { Loading } from "../../utils/Loading";
+import "./styles.css"
 
-const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
+const Recipes = ({ getRecipes,auth,getUserRecipes, recipe: { recipes, loading } }) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     getRecipes(search);
+    //auth && getUserRecipes(auth._id,);
   }, [getRecipes,search]);
 
   const onChange = async e => {
@@ -22,29 +24,13 @@ const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="header">
-          <div className="text-box">
-            <h1 className="heading-primary">
-              <span className="heading-primary-sub">
-                search for any dish comes to your mind{" "}
-              </span>
-            </h1>
+        <div>
+       
             <SearchRecipe search={search} onChange={onChange} />
-          </div>
         </div>
       )}
-      <div>
-        <label htmlFor="myRecipes">My recipes</label>
-        <input type="checkbox" value="myRecipes"></input>
-
-        <label htmlFor="favorites">Favorites</label>
-        <input type="checkbox" value="favorites"></input>
-
-        <label htmlFor="vegan">Vegan </label>
-        <input type="checkbox" value="vegan"></input>
-        
-      </div>
-      <div className="recipeCardContainer">
+    
+      <div className="recipe-card-container">
         {recipes &&
           !loading &&
           recipes.map(recipe => (
@@ -57,14 +43,16 @@ const Recipes = ({ getRecipes, recipe: { recipes, loading } }) => {
 
 const mapStateToProps = state => ({
   recipe: state.recipe,
+  auth:state.auth.user
   
 });
 
 Recipes.propTypes = {
   getRecipes: PropTypes.func.isRequired,
   recipe: PropTypes.object.isRequired,
+  getUserRecipes:PropTypes.func.isRequired,
   
   
 };
 
-export default connect(mapStateToProps, { likeRecipe, getRecipes })(Recipes);
+export default connect(mapStateToProps, { likeRecipe,getUserRecipes, getRecipes })(Recipes);

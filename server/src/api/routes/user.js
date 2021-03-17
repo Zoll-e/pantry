@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const User = require("../../model/User");
+const Profile = require("../../model/Profile");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -42,6 +43,7 @@ router.post(
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
+      
 
       await user.save();
    
@@ -49,16 +51,25 @@ router.post(
      
       const payload = { _id: user.id, name: user.name }; // Create JWT Payload
 
+      //Create profile
+
+      const profile = new Profile({user:user.id})
+      await profile.save();
+
       // Sign Token
       jwt.sign(payload, secretOrKey, { expiresIn: 3600 }, (err, token) => {
         res.json({
           success: true,
+          
           token: "Bearer " + token
           
         });
       });
     } catch (err) {
       console.error(err.message);
+      if(user){
+        user.delete();
+      }
       res.status(500).send("Server error");
     
   

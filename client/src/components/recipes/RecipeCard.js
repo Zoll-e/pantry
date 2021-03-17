@@ -18,15 +18,16 @@ const RecipeCard = ({
 
   return (
     <div
-      className="recipeCard"
+      className="recipe-card"
       onClick={e => routeChange()}
       style={{
         backgroundImage: `url(${picture})`,
         borderRadius: 5,
       }}
     >
-      <p className={"dishName"}>{dish}</p>
-      <div className="recipeCardOverlay"><p>{intro}</p></div>
+      <p className="dish-name">{dish}</p>
+
+      <div className="recipe-card-overlay"><p>{intro}</p></div>
     </div>
   );
 };

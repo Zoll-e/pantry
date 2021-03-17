@@ -32,6 +32,7 @@ export const getRecipes = search => async dispatch => {
     dispatch({ type: RECIPES_FAIL });
   }
 };
+
 export const getUserRecipes = userId => async dispatch => {
   try {
     let res = await axios.get(`/api/recipe/userrecipes/${userId}`);
