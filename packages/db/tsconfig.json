@@ -1,10 +1,8 @@
 {
   "extends": "@pantry/typescript-config/base.json",
   "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
     "outDir": "./dist",
     "rootDir": "."
-  }
+  },
+  "include": ["src/**/*", "drizzle.config.ts"]
 }

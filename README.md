@@ -4,7 +4,7 @@ Recipe sharing app that's sole purpose is for me to learn new things
 
 ## 🏗️ The infrastructure
 
-- Turborepo 
+- Turborepo
 - Bun
 
 ## ⚙️ The backend (API)
@@ -12,26 +12,25 @@ Recipe sharing app that's sole purpose is for me to learn new things
 - Hono
 - Bun sql
 - Drizzle orm
-- Zod 
+- Zod
 - Neverthrow
 - Cloudinary/s3/gcp storage (yet to be decided)
 - Better auth (clerk if managed, yet to be decided)
 
 ## 🎨 The frontend (Web)
+
 - React + Vite
 - TanStack Query
 - TanStack Router
 
 ## 🧪 Testing & Devops
+
 - Bun test
 - Testcontainers
 
 ## 🧹 Code Quality
+
 - Shared typescript config
 - Shared ESLint Config
 - Prettier
 - Husky + lint staged
-
-
-
-
