@@ -1,0 +1,8 @@
+{
+  "extends": "@pantry/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "."
+  },
+  "include": ["src/**/*", "drizzle.config.ts"]
+}

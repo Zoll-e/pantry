@@ -1,5 +1,5 @@
 import { SQL } from 'bun';
-import * as schema from './schema';
+import * as schema from './schema.js';
 import { drizzle } from 'drizzle-orm/singlestore/driver';
 
 const client = new SQL(process.env.DATABASE_URL!);
