@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "dev": "docker compose up -d && turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
@@ -14,14 +14,16 @@
     "lint-staged": "^16.3.0",
     "prettier": "^3.8.1",
     "turbo": "^2.8.12",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "eslint": "^9.39.1",
+    "@pantry/eslint-config": "workspace:*"
   },
   "lint-staged": {
     "**/*.{ts,tsx,md,js,jsx,json,css,scss,html}": [
-      "prettier --write"
+      "bunx prettier --write"
     ],
     "**/*.{ts,tsx,js,jsx}": [
-      "eslint --fix"
+      "bunx eslint --fix"
     ]
   },
   "engines": {
