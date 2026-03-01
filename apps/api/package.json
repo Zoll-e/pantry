@@ -9,12 +9,12 @@
     "@hono/zod-validator": "^0.7.6",
     "hono": "^4.12.3",
     "neverthrow": "^8.2.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@pantry/db": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@pantry/typescript-config": "workspace:*",
-    "@pantry/db": "workspace:*",
     "@pantry/eslint-config": "workspace:*"
   }
 }
